@@ -3,13 +3,8 @@ class StructureDiff:
    # Initialize structure diff
    def __init__(self, type):
       self.type = type
-      self.changeTokens = []
-      self.numericalTokens = []
+      self.tokens = []
 
-   # Add change token
-   def addChangeToken(self, token):
+   # Add token
+   def addToken(self, token):
       self.changeTokens.append(token)
-
-   # Add numerical token
-   def addNumericalToken(self, token):
-      self.numericalTokens.append(token)
