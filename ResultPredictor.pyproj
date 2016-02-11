@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>809fea66-e136-4b82-8d6a-d0d36c5c1f0c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ResultPredictor.py</StartupFile>
+    <StartupFile>run.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,13 +22,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app\api\ProjectsAPI.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models\CommitDiff.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\FileDiff.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="models\NumericalToken.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\stat\StructureType.py">
@@ -43,22 +49,56 @@
     <Compile Include="plugins\dejagnu\Parser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Menu.py">
+    <Compile Include="plugins\dejagnu\tokens\ChangeToken.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="plugins\dejagnu\stat\ChangeToken.py">
+    <Compile Include="run.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ResultPredictor.py" />
+    <Compile Include="utils\GitWrap.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utils\ResultCloud.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\api\" />
+    <Folder Include="app\static\css\" />
+    <Folder Include="app\static\fonts\" />
+    <Folder Include="app\static\js\" />
+    <Folder Include="app\static\js\controllers\" />
     <Folder Include="methods\bayesian\" />
     <Folder Include="models\" />
     <Folder Include="models\stat\" />
+    <Folder Include="app\" />
+    <Folder Include="app\templates\" />
+    <Folder Include="app\static\" />
+    <Folder Include="utils\" />
     <Folder Include="plugins\dejagnu\" />
     <Folder Include="plugins\dejagnu\stat\" />
+    <Folder Include="plugins\dejagnu\tokens\" />
     <Folder Include="methods\" />
     <Folder Include="plugins\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\static\css\bootstrap.min.css" />
+    <Content Include="app\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="app\static\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="app\static\js\angular-ui-router.min.js" />
+    <Content Include="app\static\js\bootstrap.min.js" />
+    <Content Include="app\static\js\app.js" />
+    <Content Include="app\static\js\controllers\DashboardController.js" />
+    <Content Include="app\static\js\factory.js" />
+    <Content Include="app\static\js\controllers\ProjectsController.js" />
+    <Content Include="app\static\js\restangular.min.js" />
+    <Content Include="app\static\js\underscore.min.js" />
+    <Content Include="app\templates\dashboard.html" />
+    <Content Include="app\templates\index.html" />
+    <Content Include="app\templates\projects.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
