@@ -1,1 +1,32 @@
-﻿<h2>Projects</h2>
+﻿{% raw %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Projects</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tools-panel">
+                Show: <span class="text-selection">Everything</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="win-list selectable">
+                <li ui-sref="project.board({projectId:project.id})" ng-repeat="project in projects">
+                    <img class="thumb" src="static/img/OpenFolder-64.png" alt="Alternate Text" />
+                    <div>
+                        {{project.name}}
+                    </div>
+                    <div>
+                        <span class="desc">Repository: {{project.repository}}</span>
+                    </div>
+                    <div class="float-clear"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endraw  %}

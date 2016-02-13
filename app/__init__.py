@@ -1,13 +1,15 @@
 from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.restful import Api
-from app.api.ProjectsAPI import ProjectsAPI, ProjectAPI
 
 # Initialize application
 app = Flask(__name__)
+app.config.from_object('config')
+db = SQLAlchemy(app)
 api = Api(app)
 
-# Initialize resources
-api.add_resource(ProjectsAPI, '/api/projects')
-api.add_resource(ProjectAPI, '/api/projects/<project_id>')
+from app import views, models, services
 
-from app import views
+# Initialize resources
+api.add_resource(services.ProjectsService, '/api/projects')
+api.add_resource(services.ProjectService, '/api/projects/<project_id>')

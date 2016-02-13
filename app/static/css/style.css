@@ -1,0 +1,157 @@
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    padding-left: 1rem;
+}
+
+.navbar {
+    border: none;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    background: #E6E6E6;
+}
+
+.navbar-default .navbar-brand {
+    color: black;
+}
+
+div.main-view {
+    margin-top: 5rem;
+}
+
+ul.win-list {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+ul.win-list.selectable li {
+    display: block;
+    padding: 1rem;
+}
+
+ul.win-list.selectable li:hover {
+    cursor: pointer;
+    background: #E6E6E6;
+}
+
+ul.win-list img.thumb {
+    float: left;
+    background: #CF7934;
+    margin-right: 1rem;
+    padding: 1rem;
+    width: 6rem;
+}
+
+ul.win-list li.inactive img.thumb {
+    background: #CECECE;
+}
+
+div.float-clear {
+    clear: both;
+}
+
+span.desc {
+    color: #666666;
+}
+
+div.tools-panel {
+    padding: 1rem;
+    color: black;
+}
+
+div.tools-panel span.tool-item {
+    margin-right: 2rem;
+}
+
+div.tools-panel span.text-selection {
+    color: #CF7934;
+}
+
+img.back-button {
+    float: left;
+    padding: 1.5rem;
+    width: 5.25rem;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+img.back-button:hover {
+    background: #CECECE;
+}
+
+div.table {
+    display: table;
+    width: 100%;
+}
+
+div.table-cell {
+    display: table-cell;
+}
+
+div.side-bar {
+    background: #F2F2F2;
+    width: 5.25rem;
+    position: fixed;
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+div.side-bar img {
+    padding: 1.5rem;
+    width: 5.25rem;
+    display: block;
+}
+
+div.side-bar img:hover {
+    background: #D9D9D9;
+    cursor: pointer;
+}
+
+div.side-bar img.setting-icon {
+    margin-top: 5.25rem;
+}
+
+div.side-bar .active {
+    border-left: solid 0.5rem #CF7934;
+    padding-left: 1rem;
+}
+
+div.side-content .container-fluid {
+    padding-left: 7rem;
+}
+
+div.side-content .content {
+    padding-left: 1rem;
+}
+
+div.git-list table {
+    width: 100%;
+}
+
+div.git-list table td {
+    padding: 1.5rem;
+    color: black;
+}
+
+div.git-list table td.comment {
+    color: #616161;
+}
+
+div.git-list table:nth-child(even) {
+    background: #FFF
+
+}
+
+div.git-list table:nth-child(odd) {
+    background: #F2F2F2
+
+}
+
+div.git-list table:hover {
+    background: #C3C3C3;
+    cursor: pointer;
+}

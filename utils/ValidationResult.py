@@ -8,4 +8,7 @@ class ValidationResult(object):
         self.errors.append(message)
         self.isValid = False
 
+    def getVars(self):
+        return vars(self)
+
 

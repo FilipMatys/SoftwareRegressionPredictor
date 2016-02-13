@@ -13,16 +13,46 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Define states
     $stateProvider
-        // Dashboard page
-        .state('dashboard', {
-            url: '/',
-            templateUrl: 'dashboard',
-            controller: 'DashboardController'
-        })
         // Projects page
         .state('projects', {
-            url: '/projects',
+            url: '/',
             templateUrl: 'projects',
-            controller: 'ProjectsController'
+            controller: 'ProjectsController',
+            resolve: {
+                projectsRequest: function (ProjectService) {
+                    return ProjectService.getList();
+                }
+            }
+        })
+        .state('project', {
+            url: '/project/:projectId',
+            templateUrl: 'project',
+            controller: 'ProjectController',
+            abstract: true,
+            resolve: {
+                projectRequest: function (ProjectService, $stateParams) {
+                    return ProjectService.get($stateParams.projectId);
+                }
+            }
+        })
+        .state('project.board', {
+            url: '',
+            templateUrl: 'project_board',
+            controller: 'ProjectBoardController',
+        })
+        .state('project.git', {
+            url: '/git',
+            templateUrl: 'project_git',
+            controller: 'ProjectGitController',
+        })
+        .state('project.model', {
+            url: '/model',
+            templateUrl: 'project_model',
+            controller: 'ProjectModelController',
+        })
+        .state('project.settings', {
+            url: '/settings',
+            templateUrl: 'project_settings',
+            controller: 'ProjectSettingsController',
         })
 });

@@ -20,7 +20,11 @@ class ResultCloud:
 
     def send_request(self, method, function, params):
         str_values = "&".join(["%s=%s" % (k, v) for k, v in params.items()])
-        request = "%s%s.%s?%s" % (self.URL, method, function, str_values)
+
+        if not str_values:
+            request = "%s%s.%s" % (self.URL, method, function)
+        else:
+            request = "%s%s.%s?%s" % (self.URL, method, function, str_values)
 
         resp = json.loads(requests.get(request).text)
         return resp
@@ -29,8 +33,8 @@ class ResultCloud:
         resp = self.send_request("plugins", "get", {})
         return self.check_valid(resp)
 
-    def get_projects(self, plugin):
-        resp = self.send_request("plugins", "getProjects", {"plugin": plugin})
+    def get_git_projects(self):
+        resp = self.send_request("projects", "getGitList", {})
         return self.check_valid(resp)
 
     def check_valid(self, resp):
