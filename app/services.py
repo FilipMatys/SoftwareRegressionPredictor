@@ -1,14 +1,13 @@
-from flask import jsonify, request
-from flask.ext.restful import Api, Resource
 from utils.ResultCloud import ResultCloud
+from utils.GitWrap import GitWrap
 from utils.ValidationResult import ValidationResult
 from app import models
 from app import db
+import config
 
-""" Project service """
-class ProjectService(Resource):
-    # Get detail of project
-    def get(self, project_id):
+class ProjectService():
+    """ Get detail of project """
+    def getDetail(project_id):
         # Load project from internal database
         project = models.Project.query.filter_by(id=project_id).first()
 
@@ -21,16 +20,15 @@ class ProjectService(Resource):
 
         # Prepare validation and return result
         validation = ValidationResult(models.serialize(project))
-        return jsonify(validation.getVars())
+        return validation
 
-    # Delete project
-    def delete(self, project_id):
-        return jsonify({"data": "delete project"})
+    """ Save project """
+    def save(project):
+        db.session.add(project)
+        db.session.commit()
 
-""" Projects service """
-class ProjectsService(Resource):
-    # Get list of projects
-    def get(self):
+    """ Get list of objects """
+    def getList():
         # Init api handler
         resultCloud = ResultCloud("http://result-cloud.org/production/method/")
 
@@ -48,22 +46,28 @@ class ProjectsService(Resource):
 
             # Merge new projects
             for project in externalProjects:
-                print(project)
                 if not models.Project.query.filter_by(ext_id=project["Id"]).first():
                     new_project = models.Project(project["Id"], project["Name"], project["GitRepository"])
-                    db.session.add(new_project)
-                    db.session.commit()
+                    self.save(new_project)
 
             # Load internal projects
             internalProjects = models.Project.query.all()
 
             # Prepare validation and return result
             validation =  ValidationResult([models.serialize(project) for project in internalProjects])
-            return jsonify(validation.getVars())
+            return validation
 
+class GitService():
+    def clone(project_id):
+        # Load project from internal database
+        project = models.Project.query.filter_by(id=project_id).first()
 
-    # Save new project
-    def post(self, project):
-        return jsonify({"data": "save project"})
+        # Init git wrap
+        gitWrap = GitWrap(project.repository, config.REPOSITORIES)
 
+        # Clone
+        gitWrap.clone()
 
+        # Init validation
+        return ValidationResult(dict())
+        

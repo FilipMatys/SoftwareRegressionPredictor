@@ -8,3 +8,11 @@
         }
     }
 });
+
+app.factory('GitService', function (Restangular) {
+    return {
+        clone: function (id) {
+            return Restangular.one('git', id).get();
+        }
+    }
+});

@@ -29,3 +29,7 @@ def project_model():
 @app.route('/project_git')
 def project_git():
     return render_template('project_git.html')
+
+@app.route('/commit')
+def commit():
+    return render_template('commit.html')

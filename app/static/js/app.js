@@ -45,6 +45,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'project_git',
             controller: 'ProjectGitController',
         })
+        .state('project.commit', {
+            url: '/git/:hash',
+            templateUrl: 'commit',
+            controller: 'ProjectCommitController',
+        })
         .state('project.model', {
             url: '/model',
             templateUrl: 'project_model',
