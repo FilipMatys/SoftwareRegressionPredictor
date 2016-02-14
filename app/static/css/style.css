@@ -7,6 +7,10 @@
     padding-left: 1rem;
 }
 
+.subheader {
+    margin-top: 2rem;
+}
+
 .navbar {
     border: none;
     border-radius: 0px;
@@ -128,10 +132,18 @@ div.side-content .content {
     padding-left: 1rem;
 }
 
+div.diff-list table,
 div.git-list table {
     width: 100%;
 }
 
+div.git-list table tr td:first-child,
+div.git-list table tr td:last-child  {
+    width: 20%;
+}
+
+div.diff-list table td,
+div.diff-list table th,
 div.git-list table td {
     padding: 1.5rem;
     color: black;
@@ -141,17 +153,37 @@ div.git-list table td.comment {
     color: #616161;
 }
 
+div.diff-list table tr:nth-child(even),
 div.git-list table:nth-child(even) {
     background: #FFF
 
 }
 
+div.diff-list table tr:nth-child(odd),
 div.git-list table:nth-child(odd) {
     background: #F2F2F2
 
 }
 
-div.git-list table:hover {
+div.git-list.selectable table:hover {
     background: #C3C3C3;
     cursor: pointer;
+}
+
+div.diff-list table td.thumb {
+    width: 5rem;
+}
+
+div.diff-list table td img {
+    width: 2rem;
+}
+
+div.diff-list table {
+    margin-bottom: 2rem;
+}
+
+div.diff-list table tr th {
+    background: white;
+    font-weight: normal;
+    padding-left: 0rem;
 }

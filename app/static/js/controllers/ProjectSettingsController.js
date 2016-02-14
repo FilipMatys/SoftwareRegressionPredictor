@@ -1,6 +1,6 @@
-﻿app.controller('ProjectSettingsController', ['$scope', 'GitService', function ($scope, GitService) {
+﻿app.controller('ProjectSettingsController', ['$scope', 'RepositoryService', function ($scope, RepositoryService) {
     // Clone project
     $scope.cloneProject = function () {
-        GitService.clone($scope.project.id);
+        RepositoryService.clone($scope.project.id);
     }
 }]);

@@ -14,9 +14,24 @@ class ProjectsResource(Resource):
     def get(self):
             return jsonify(services.ProjectService.getList().getVars())
 
-""" Git resource """
-class GitResource(Resource):
+""" Repository clone resource """
+class RepositoryCloneResource(Resource):
     # Clone project repository
     def get(self, project_id):
-        return jsonify(services.GitService.clone(project_id).getVars())
+        return jsonify(services.RepositoryService.clone(project_id).getVars())
+
+""" Repository exists resource """
+class RepositoryExistsResource(Resource):
+    def get(self, project_id):
+        return jsonify(services.RepositoryService.exists(project_id).getVars())
+
+""" Repository log resource """
+class RepositoryLogResource(Resource):
+    def get(self, project_id):
+        return jsonify(services.RepositoryService.log(project_id).getVars())
+
+""" Repository commit resource """
+class RepositoryCommitResource(Resource):
+    def get(self, project_id, hash):
+        return jsonify(services.RepositoryService.getCommit(project_id, hash).getVars())      
 

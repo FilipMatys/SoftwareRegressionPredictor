@@ -13,4 +13,7 @@ from app import views, models, resources
 # Initialize resources
 api.add_resource(resources.ProjectsResource, '/api/projects')
 api.add_resource(resources.ProjectResource, '/api/projects/<project_id>')
-api.add_resource(resources.GitResource, '/api/git/<project_id>')
+api.add_resource(resources.RepositoryCloneResource, '/api/repository/<project_id>/clone')
+api.add_resource(resources.RepositoryExistsResource, '/api/repository/<project_id>/exists')
+api.add_resource(resources.RepositoryLogResource, '/api/repository/<project_id>/log')
+api.add_resource(resources.RepositoryCommitResource, '/api/repository/<project_id>/commit/<hash>')
