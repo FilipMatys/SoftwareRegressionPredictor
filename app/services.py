@@ -17,10 +17,28 @@ class ProjectService():
             validation = ValidationResult(dict())
             validation.addError("Project not in internal database")
 
-            return jsonify(validation.getVars())
+            return validation
+
+        # Init result cloud api
+        resultCloud = ResultCloud(config.RESULT_CLOUD_API)
+        
+        # Try to load project
+        try:
+            response = resultCloud.get_project(project.ext_id)
+        except:
+            # Prepare validation and return result
+            validation = ValidationResult(models.serialize(project))
+            return validation
+
+        # Init result
+        result = models.serialize(project)
+
+        # If there was a response, get submissions
+        if response:
+            result["submissions"] = resultCloud.last_response['Result']
 
         # Prepare validation and return result
-        validation = ValidationResult(models.serialize(project))
+        validation = ValidationResult(result)
         return validation
 
     """ Save project """
@@ -31,7 +49,7 @@ class ProjectService():
     """ Get list of objects """
     def getList():
         # Init api handler
-        resultCloud = ResultCloud("http://result-cloud.org/production/method/")
+        resultCloud = ResultCloud(config.RESULT_CLOUD_API)
 
         # Try to load projects from result cloud
         try:

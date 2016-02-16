@@ -26,11 +26,17 @@ class ResultCloud:
         else:
             request = "%s%s.%s?%s" % (self.URL, method, function, str_values)
 
+        print(request)
+
         resp = json.loads(requests.get(request).text)
         return resp
 
     def get_plugins(self):
         resp = self.send_request("plugins", "get", {})
+        return self.check_valid(resp)
+
+    def get_project(self, project_id):
+        resp = self.send_request("projects", "get", {"project" : project_id})
         return self.check_valid(resp)
 
     def get_git_projects(self):
