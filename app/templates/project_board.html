@@ -1,1 +1,17 @@
-﻿<h2>Dashboard</h2>
+﻿{% raw %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="tools-panel">
+            <span class="tool-item">{{project.repository}}</span>
+            <span class="tool-item">Number of submissions: <span class="text-selection">{{project.submissions.length}}</span></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="content">
+
+        </div>
+    </div>
+</div>
+{% endraw %}

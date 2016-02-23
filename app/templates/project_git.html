@@ -3,7 +3,17 @@
     <div class="col-md-12">
         <div class="tools-panel">
             <span class="tool-item">{{project.repository}}</span>
-            <span class="tool-item">Show: <span class="text-selection">10 items</span></span>
+            <div class="tool-item dropdown">
+                Show:
+                <span class="text-selection" id="dropdownNumberOfItemsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    10 items
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="dropdownNumberOfItemsMenu">
+                    <li><a href="#">10 items</a></li>
+                    <li><a href="#">20 items</a></li>
+                    <li><a href="#">50 items</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -17,7 +27,11 @@
                     <td>{{commit.author}}</td>
                 </tr>
                 <tr>
-                    <td class="comment" colspan="3">{{commit.message}}</td>
+                    <td class="comment" colspan="2">{{commit.message}}</td>
+                    <td>
+                        <span class="active-text" ng-if="commit.test">TESTED</span>
+                        <span class="weak-text" ng-if="!commit.test">NOT TESTED</span>
+                    </td>
                 </tr>
             </table>
         </div>

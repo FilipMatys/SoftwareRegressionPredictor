@@ -66,10 +66,29 @@ div.tools-panel {
     color: black;
 }
 
-div.tools-panel span.tool-item {
+div.tools-panel .tool-item {
     margin-right: 2rem;
 }
 
+div.dropdown {
+    display: inline-block;
+}
+
+div .dropdown-menu {
+    border-radius: 0rem;
+    box-shadow: none;
+    padding: 0rem;
+}
+
+div .dropdown-menu>li>a {
+    padding: 1rem 2rem;
+}
+
+span.text-selection {
+    cursor: pointer;
+}
+
+span.active-text,
 div.tools-panel span.text-selection {
     color: #CF7934;
 }
@@ -149,6 +168,7 @@ div.git-list table td {
     color: black;
 }
 
+span.weak-text,
 div.git-list table td.comment {
     color: #616161;
 }

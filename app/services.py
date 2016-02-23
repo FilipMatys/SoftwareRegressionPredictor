@@ -35,7 +35,7 @@ class ProjectService():
 
         # If there was a response, get submissions
         if response:
-            result["submissions"] = resultCloud.last_response['Result']
+            result["submissions"] = resultCloud.last_response['Result']['Submissions']
 
         # Prepare validation and return result
         validation = ValidationResult(result)

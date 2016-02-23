@@ -42,6 +42,7 @@ class CommitWrap(object):
         self.message = commit.message
         self.author = commit.author.name
         self.hash = commit.hexsha
+        self.test = False
         self.commited_time = time.asctime(time.gmtime(commit.committed_date))
 
     def getVars(self):
