@@ -22,7 +22,7 @@
     color: black;
 }
 
-div.main-view {
+.main-view {
     margin-top: 5rem;
 }
 
@@ -138,7 +138,7 @@ div.side-bar img.setting-icon {
     margin-top: 5.25rem;
 }
 
-div.side-bar .active {
+div.side-bar .router-link-active img {
     border-left: solid 0.5rem #CF7934;
     padding-left: 1rem;
 }
@@ -179,15 +179,20 @@ div.git-list table:nth-child(even) {
 
 }
 
+div.git-list a {
+    display: block;
+}
+
 div.diff-list table tr:nth-child(odd),
-div.git-list table:nth-child(odd) {
+div.git-list a:nth-child(odd),
+div.git-list.single table {
     background: #F2F2F2
 
 }
 
-div.git-list.selectable table:hover {
+div.git-list.selectable a:hover {
     background: #C3C3C3;
-    cursor: pointer;
+    text-decoration: none;
 }
 
 div.diff-list table td.thumb {

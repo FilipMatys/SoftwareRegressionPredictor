@@ -1,19 +1,27 @@
 ﻿{% raw %}
 <div class="table">
     <div class="table-cell side-bar">
-        <img ui-sref-active="active" ui-sref="project.board" src="static/img/Dashboard-64.png" />
-        <img ui-sref-active="active" ui-sref="project.git" src="static/img/Git-64.png" />
-        <img ui-sref-active="active" ui-sref="project.model" src="static/img/Regression-64.png" />
-        <img ui-sref-active="active" ui-sref="project.settings" class="setting-icon" src="static/img/Settings-64.png" />
+        <a [routerLink]="['ProjectBoard']">
+            <img src="static/img/Dashboard-64.png" />
+        </a>
+        <a [routerLink]="['ProjectGit']">
+            <img src="static/img/Git-64.png" />
+        </a>
+        <a [routerLink]="['ProjectModel']">
+            <img src="static/img/Regression-64.png" />
+        </a>
+        <a [routerLink]="['ProjectSettings']">
+            <img class="setting-icon" src="static/img/Settings-64.png" />
+        </a>
     </div>
-    <div class="table-cell side-content">
+    <div *ngIf="project" class="table-cell side-content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <h2>{{project.name}}</h2>
                 </div>
             </div>
-            <ui-view></ui-view>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

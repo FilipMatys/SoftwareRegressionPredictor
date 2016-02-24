@@ -6,6 +6,10 @@ from app import app
 def index():
     return render_template('index.html')
 
+@app.route('/frame')
+def frame():
+    return render_template('frame.html')
+
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
@@ -30,6 +34,14 @@ def project_model():
 def project_git():
     return render_template('project_git.html')
 
-@app.route('/commit')
-def commit():
-    return render_template('commit.html')
+@app.route('/project_git_commit')
+def project_git_commit():
+    return render_template('project_git_commit.html')
+
+@app.route('/project_git_log')
+def project_git_log():
+    return render_template('project_git_log.html')
+
+@app.route('/<path:dummy>')
+def fallback(dummy):
+    return render_template('index.html')

@@ -1,0 +1,42 @@
+﻿{% raw %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="tools-panel">
+            <span class="tool-item">{{project.repository}}</span>
+            <div class="tool-item dropdown">
+                Show:
+                <span class="text-selection" id="dropdownNumberOfItemsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    10 items
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="dropdownNumberOfItemsMenu">
+                    <li><a href="#">10 items</a></li>
+                    <li><a href="#">20 items</a></li>
+                    <li><a href="#">50 items</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="commits" class="row">
+    <div class="col-md-12">
+        <div class="content git-list selectable">
+            <a [routerLink]="['ProjectGitCommit', { hash: commit.hash }]" *ngFor="#commit of commits">
+                <table>
+                    <tr>
+                        <td>{{commit.commited_time}}</td>
+                        <td>{{commit.hash}}</td>
+                        <td>{{commit.author}}</td>
+                    </tr>
+                    <tr>
+                        <td class="comment" colspan="2">{{commit.message}}</td>
+                        <td>
+                            <span class="active-text" *ngIf="commit.test">TESTED</span>
+                            <span class="weak-text" *ngIf="!commit.test">NOT TESTED</span>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+        </div>
+    </div>
+</div>
+{% endraw %}
