@@ -44,16 +44,14 @@
     <Compile Include="db_create.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="explore_ast.py" />
     <Compile Include="models\CommitDiff.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\FileDiff.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models\stat\StructureType.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="models\StructureDiff.py">
+    <Compile Include="models\stat\DiffState.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\Token.py">
@@ -62,7 +60,7 @@
     <Compile Include="plugins\dejagnu\Parser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="plugins\dejagnu\tokens\ChangeToken.py">
+    <Compile Include="plugins\dejagnu\stat\ChangeToken.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="run.py">
@@ -82,7 +80,6 @@
     <Folder Include="app\static\css\" />
     <Folder Include="app\static\fonts\" />
     <Folder Include="app\static\js\" />
-    <Folder Include="app\static\js\controllers\" />
     <Folder Include="app\static\module.project\" />
     <Folder Include="app\static\models\" />
     <Folder Include="app\static\services\" />
@@ -2154,7 +2151,6 @@
     <Folder Include="utils\" />
     <Folder Include="plugins\dejagnu\" />
     <Folder Include="plugins\dejagnu\stat\" />
-    <Folder Include="plugins\dejagnu\tokens\" />
     <Folder Include="methods\" />
     <Folder Include="plugins\" />
   </ItemGroup>
@@ -2167,17 +2163,8 @@
     <Content Include="app\static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="app\static\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="app\static\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="app\static\js\angular-ui-router.min.js" />
     <Content Include="app\static\js\bootstrap.min.js" />
-    <Content Include="app\static\js\app.js" />
-    <Content Include="app\static\js\controllers\ProjectBoardController.js" />
-    <Content Include="app\static\js\controllers\ProjectCommitController.js" />
-    <Content Include="app\static\js\controllers\ProjectController.js" />
-    <Content Include="app\static\js\controllers\ProjectGitController.js" />
-    <Content Include="app\static\js\controllers\ProjectModelController.js" />
-    <Content Include="app\static\js\controllers\ProjectSettingsController.js" />
-    <Content Include="app\static\js\factory.js" />
-    <Content Include="app\static\js\controllers\ProjectsController.js" />
+    <Content Include="app\static\js\jquery-2.2.0.min.js" />
     <Content Include="app\static\module.project\project-git-commit.component.ts" />
     <Content Include="app\static\module.project\project-git-log.component.ts" />
     <Content Include="app\static\module.project\project-settings.component.ts" />
@@ -2185,8 +2172,6 @@
     <Content Include="app\static\module.project\project-git.component.ts" />
     <Content Include="app\static\module.project\project-board.component.ts" />
     <Content Include="app\static\module.project\project-detail.component.ts" />
-    <Content Include="app\static\js\restangular.min.js" />
-    <Content Include="app\static\js\underscore.min.js" />
     <Content Include="app\static\main.ts" />
     <Content Include="app\static\node_modules\.bin\concurrent" />
     <Content Include="app\static\node_modules\.bin\concurrent.cmd" />

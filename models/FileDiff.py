@@ -1,10 +1,9 @@
 # Difference for a file
 class FileDiff:
-   # Initialize file diff
-   def __init__(self, name):
-       self.name = name
-       self.structures = []
+    # Initialize file diff
+    def __init__(self, name):
+        self.name = name
+        self.tokens = dict()
 
-   # Add structure
-   def addStructure(self, structure):
-       self.structures.append(structure)
+    def getVars(self):
+        return vars(self)

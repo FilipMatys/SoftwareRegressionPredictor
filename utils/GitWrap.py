@@ -32,6 +32,9 @@ class GitWrap:
     def checkout(self):
         self.repo.heads.past_branch.checkout()
 
+    def get_file_content(self, commit, file):
+        return self.repo.git.execute(['git', 'show', '%s:%s' % (commit, file)])
+
     def log(self, number):
         return list(self.repo.iter_commits(self.repo.active_branch, max_count=number))
 
@@ -47,25 +50,3 @@ class CommitWrap(object):
 
     def getVars(self):
         return vars(self)
-
-class DiffState(Enum):
-    REMOVED = 0
-    INSERTED = 1
-
-class DiffWrap(object):
-    def __init__(self, diff):
-        self.old_path = diff[0][1]
-        self.new_path = diff[0][3]
-        self.changes = list()
-
-        changes = diff[1]
-        # Iterate through changes
-        for change in changes:
-            if change[0] is None:
-                self.changes.append({ "state": DiffState.REMOVED.value, "text": change[2]})
-            elif change[1] is None:
-                self.changes.append({ "state": DiffState.INSERTED.value, "text": change[2]})
-
-    def getVars(self):
-        return vars(self)
-

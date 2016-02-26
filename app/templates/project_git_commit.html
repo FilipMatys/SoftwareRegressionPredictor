@@ -22,32 +22,4 @@
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <h4 class="subheader">Changes</h4>
-    </div>
-</div>
-<div *ngIf="commit" class="row">
-    <div class="col-md-12">
-        <div class="content diff-list">
-            <table *ngFor="#diff of commit.diff">
-                <tr>
-                    <th colspan="2">
-                        --{{diff.old_path}} ++{{diff.new_path}}
-                    </th>
-                </tr>
-                <tr *ngFor="#change of diff.changes">
-                    <td class="thumb">
-                        <img *ngIf="change.state==1" src="static/img/Plus-64.png" />
-                        <img *ngIf="change.state==0" src="static/img/Minus-64.png" />
-                    </td>
-                    <td>
-                        {{change.text}}
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
 {% endraw %}

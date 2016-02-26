@@ -1,6 +1,7 @@
 from utils.ResultCloud import ResultCloud
-from utils.GitWrap import GitWrap, CommitWrap, DiffWrap
+from utils.GitWrap import GitWrap, CommitWrap
 from utils.ValidationResult import ValidationResult
+from plugins.dejagnu.Parser import Parser
 from app import models
 from app import db
 import config
@@ -139,7 +140,8 @@ class RepositoryService():
         commitWrap = CommitWrap(commit)
 
         # Get commit changes
-        commitWrap.diff = [DiffWrap(diff).getVars() for diff in whatthepatch.parse_patch(gitWrap.get_commit_diff(hash))] 
+        parser = Parser(gitWrap, hash)
+        commitWrap.diff = parser.run().getVars() 
        
         # Return result
         return ValidationResult(commitWrap.getVars())
