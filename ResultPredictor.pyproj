@@ -44,7 +44,6 @@
     <Compile Include="db_create.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="explore_ast.py" />
     <Compile Include="models\CommitDiff.py">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +63,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="run.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utils\CLanguageTools.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utils\GitWrap.py">
