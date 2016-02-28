@@ -23,10 +23,102 @@ class CLanguageTools(object):
         # Do the comparison
         return compare(astX, astY)   
 
+    """ Check if nodes are the same """
+    def checkNodes(nodeX, nodeY):
+        # Get type of first node. 
+        # There is no need for the other cause it would not be used
+        typeOfX = type(nodeX)
+    
+        # Compare node type
+        if not typeOfX == type(nodeY):
+            return False
+
+        # Check attributes based on type
+
+        # Assignment operator
+        if typeOfX == c_ast.Assignment:
+            if not nodeX.op == nodeY.op:
+                return False
+        # Binary operator
+        elif typeOfX == c_ast.BinaryOp:
+            if not nodeX.op == nodeY.op:
+                return False
+        # Constant
+        elif typeOfX == c_ast.Constant:
+            if not nodeX.type == nodeY.type or not nodeX.value == nodeY.value:
+                return False
+        # Declaration
+        elif typeOfX == c_ast.Decl:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Enum
+        elif typeOfX == c_ast.Enum:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Enumerator
+        elif typeOfX == c_ast.Enumerator:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Go to
+        elif typeOfX == c_ast.Goto:
+            if not nodeX.name == nodeY.name:
+                return False
+        # ID
+        elif typeOfX == c_ast.ID:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Identifier type
+        elif typeOfX == c_ast.IdentifierType:
+            if not nodeX.names == nodeY.names:
+                return False
+        # Label
+        elif typeOfX == c_ast.Label:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Named initializer
+        elif typeOfX == c_ast.NamedInitializer:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Pointer declaration
+        elif typeOfX == c_ast.PtrDecl:
+            if not nodeX.quals == nodeY.quals:
+                return False
+        # Structure
+        elif typeOfX == c_ast.Struct:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Structure reference
+        elif typeOfX == c_ast.StructRef:
+            if not nodeX.type == nodeY.type:
+                return False 
+        # Type declaration
+        elif typeOfX == c_ast.TypeDecl:
+            if not nodeX.declname == nodeY.declname:
+                return False
+        # Typedef
+        elif typeOfX == c_ast.Typedef:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Typename
+        elif typeOfX == c_ast.Typename:
+            if not nodeX.name == nodeY.name:
+                return False
+        # Unary operator
+        elif typeOfX == c_ast.UnaryOp:
+            if not nodeX.op == nodeY.op:
+                return False
+        # Union
+        elif typeOfX == c_ast.Union:
+            if not nodeX.name == nodeY.name:
+                return False
+
+        # Check was successful
+        return True
+
     """ Check if two nodes are equal """
     def areEqual(astX, astY):
-        # Compare node type
-        if not type(astX) == type(astY):
+        # Compare roots
+        if not checkNodes(astX, astY):
             return (False, 0)
 
         # Nodes are equal
