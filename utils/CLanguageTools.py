@@ -117,7 +117,7 @@ class CLanguageTools(object):
 
     """ Check if two nodes are equal """
     def areEqual(astX, astY):
-        # Compare roots
+        # Compare node type
         if not checkNodes(astX, astY):
             return (False, 0)
 
@@ -178,10 +178,17 @@ class CLanguageTools(object):
             # Unable to merge
             return (False, children, None, None)
 
+    """ Append changes nodes to list """
+    def appendChangedNodes(list, parent, nodes):
+        for node in nodes:
+            list.append((parent, node))
+
+        return list
+
     """ Compare two nodes """
     def compare(astX, astY):
         # Compare node type
-        if not type(astX) == type(astY):
+        if not checkNodes(astX, astY):
             return ([], [])
 
         added = list()
@@ -198,7 +205,7 @@ class CLanguageTools(object):
 
             # If could not find match, add node to removed ones
             if not merged:
-                removed.append(child)
+                removed.append((astX, child))
 
             # If the match is only partial, go deeper
             if xNode is not None:
@@ -207,6 +214,6 @@ class CLanguageTools(object):
                 removed = removed + xRemoved
        
         # Children that are not merged are new
-        added = added + childrenOfY
+        added = appendChangedNodes(added, astY, childrenOfY)
 
         return (added, removed)
