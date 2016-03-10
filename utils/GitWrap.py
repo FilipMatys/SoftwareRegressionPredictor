@@ -1,6 +1,7 @@
 import git
 import os
 import time
+import chardet
 from enum import Enum
 
 class GitWrap:
@@ -33,7 +34,16 @@ class GitWrap:
         self.repo.heads.past_branch.checkout()
 
     def get_file_content(self, commit, file):
-        return self.repo.git.execute(['git', 'show', '%s:%s' % (commit, file)])
+        content = self.repo.git.execute(['git', 'show', '%s:%s' % (commit, file)], stdout_as_string=False)
+
+        result = chardet.detect(content)
+        return content.decode(encoding=result['encoding'])
+
+    def get_file_path(self, commit, filename):
+        files = self.repo.git.execute(['git', 'ls-tree', '-r', '--name-only', '%s' % (commit)])
+        for line in files.split('\n'):
+            if filename in line:
+                return line
 
     def log(self, number):
         return list(self.repo.iter_commits(self.repo.active_branch, max_count=number))
