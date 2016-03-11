@@ -37,5 +37,5 @@ class Parser(object):
     def parseFileChanges(self, fileDiff):
         # Analyze changes
         codeAnalyzer = CodeAnalyzer(fileDiff)
-        return codeAnalyzer.parse()
+        return codeAnalyzer.analyze()
        
