@@ -28,8 +28,8 @@ class RepositoryExistsResource(Resource):
 
 """ Repository log resource """
 class RepositoryLogResource(Resource):
-    def get(self, project_id):
-        return jsonify(RepositoryService.log(project_id).getVars())
+    def get(self, project_id, number):
+        return jsonify(RepositoryService.log(project_id, number).getVars())
 
 """ Repository commit resource """
 class RepositoryCommitResource(Resource):

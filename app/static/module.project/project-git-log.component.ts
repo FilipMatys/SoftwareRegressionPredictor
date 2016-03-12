@@ -15,19 +15,37 @@ export class ProjectGitLogComponent implements OnInit {
     public project: Project;
     public commits: any[];
     public errors: any[];
+
+    public toolsPanel: {
+        show: string
+    }
     
     constructor(
         private _projectService: ProjectService,
         private _repositoryService: RepositoryService) {
         this.project = this._projectService.currentProject;
+        this.toolsPanel = {
+            show: "10 items"
+        }
     }
 
     ngOnInit() {
-        this.getLog(Number(this.project.id));
+        this.getLog(Number(this.project.id), 10);
     }
 
-    getLog(projectId: number) {
-        this._repositoryService.log(projectId).subscribe(
+    /**
+     * Selected item for show selection
+     * @param value
+     */
+    showToolItem_itemSelected(value: number) {
+        this.getLog(Number(this.project.id), value);
+
+        // Set label
+        this.toolsPanel.show = value + " items";
+    }
+
+    getLog(projectId: number, numberOfCommits: number) {
+        this._repositoryService.log(projectId, numberOfCommits).subscribe(
             result => {
                 // Check if result is valid
                 if (result.isValid) {

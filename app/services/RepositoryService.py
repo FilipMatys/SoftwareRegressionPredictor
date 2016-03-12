@@ -34,7 +34,7 @@ class RepositoryService(object):
         return ValidationResult(result)
 
     """ Load commits of projects repository """
-    def log(project_id):
+    def log(project_id, number):
         # Load project from internal database
         project = models.Project.query.filter_by(id=project_id).first()
 
@@ -42,7 +42,7 @@ class RepositoryService(object):
         gitWrap = GitWrap(project.repository, config.REPOSITORIES)
         gitWrap.init()
 
-        return ValidationResult([CommitWrap(n).getVars() for n in gitWrap.log(10)])
+        return ValidationResult([CommitWrap(n).getVars() for n in gitWrap.log(number)])
         
 
     def getCommit(project_id, hash):

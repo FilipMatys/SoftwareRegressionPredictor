@@ -1,17 +1,17 @@
 ﻿{% raw %}
 <div class="row">
     <div class="col-md-12">
-        <div class="tools-panel">
+        <div *ngIf="toolsPanel" class="tools-panel">
             <span class="tool-item">{{project.repository}}</span>
             <div class="tool-item dropdown">
                 Show:
                 <span class="text-selection" id="dropdownNumberOfItemsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    10 items
+                    {{toolsPanel.show}}
                 </span>
                 <ul class="dropdown-menu" aria-labelledby="dropdownNumberOfItemsMenu">
-                    <li><a href="#">10 items</a></li>
-                    <li><a href="#">20 items</a></li>
-                    <li><a href="#">50 items</a></li>
+                    <li><a (click)="showToolItem_itemSelected(10)">10 items</a></li>
+                    <li><a (click)="showToolItem_itemSelected(20)">20 items</a></li>
+                    <li><a (click)="showToolItem_itemSelected(50)">50 items</a></li>
                 </ul>
             </div>
         </div>

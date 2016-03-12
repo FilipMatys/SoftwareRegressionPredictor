@@ -32,13 +32,25 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                     this._projectService = _projectService;
                     this._repositoryService = _repositoryService;
                     this.project = this._projectService.currentProject;
+                    this.toolsPanel = {
+                        show: "10 items"
+                    };
                 }
                 ProjectGitLogComponent.prototype.ngOnInit = function () {
-                    this.getLog(Number(this.project.id));
+                    this.getLog(Number(this.project.id), 10);
                 };
-                ProjectGitLogComponent.prototype.getLog = function (projectId) {
+                /**
+                 * Selected item for show selection
+                 * @param value
+                 */
+                ProjectGitLogComponent.prototype.showToolItem_itemSelected = function (value) {
+                    this.getLog(Number(this.project.id), value);
+                    // Set label
+                    this.toolsPanel.show = value + " items";
+                };
+                ProjectGitLogComponent.prototype.getLog = function (projectId, numberOfCommits) {
                     var _this = this;
-                    this._repositoryService.log(projectId).subscribe(function (result) {
+                    this._repositoryService.log(projectId, numberOfCommits).subscribe(function (result) {
                         // Check if result is valid
                         if (result.isValid) {
                             _this.commits = result.data;

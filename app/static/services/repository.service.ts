@@ -13,8 +13,8 @@ export class RepositoryService {
 
 
     // Get last commits
-    log(projectId: number) {
-        return this.http.get(this._repositoriesUrl + "/" + projectId + "/log")
+    log(projectId: number, numberOfCommits: number) {
+        return this.http.get(this._repositoriesUrl + "/" + projectId + "/log/" + numberOfCommits)
             .map(res => <ValidationResult>res.json())
             .catch(this.handleError);
     }

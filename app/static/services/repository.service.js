@@ -30,8 +30,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     this._repositoriesUrl = 'api/repository';
                 }
                 // Get last commits
-                RepositoryService.prototype.log = function (projectId) {
-                    return this.http.get(this._repositoriesUrl + "/" + projectId + "/log")
+                RepositoryService.prototype.log = function (projectId, numberOfCommits) {
+                    return this.http.get(this._repositoriesUrl + "/" + projectId + "/log/" + numberOfCommits)
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
