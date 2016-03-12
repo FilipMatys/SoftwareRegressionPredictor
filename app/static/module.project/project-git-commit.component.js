@@ -32,10 +32,41 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                     this._routeParams = _routeParams;
                     this._projectService = _projectService;
                     this._repositoryService = _repositoryService;
+                    this.showLinesOfCode = true;
+                    this.showCodeAnalysis = true;
                     this.project = this._projectService.currentProject;
+                    this.toolsPanel = {
+                        show: 'All'
+                    };
                 }
                 ProjectGitCommitComponent.prototype.ngOnInit = function () {
                     this.getLog(Number(this.project.id), this._routeParams.get('hash'));
+                };
+                /**
+                 * Show items based on selected value
+                 * @param state Selected state
+                 * @param label Label of selected state
+                 */
+                ProjectGitCommitComponent.prototype.showToolItem_itemSelected = function (state, label) {
+                    switch (state) {
+                        case 'changes':
+                            this.showLinesOfCode = true;
+                            this.showCodeAnalysis = false;
+                            console.log('Changes');
+                            break;
+                        case 'analysis':
+                            this.showLinesOfCode = false;
+                            this.showCodeAnalysis = true;
+                            console.log("Analysis");
+                            break;
+                        case 'all':
+                            this.showLinesOfCode = true;
+                            this.showCodeAnalysis = true;
+                            console.log("All");
+                            break;
+                    }
+                    // Set label
+                    this.toolsPanel.show = label;
                 };
                 ProjectGitCommitComponent.prototype.getLog = function (projectId, hash) {
                     var _this = this;
@@ -43,11 +74,31 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                         // Check if result is valid
                         if (result.isValid) {
                             _this.commit = result.data;
+                            // Map changes object into list
+                            for (var index = 0; index < _this.commit.diff.files.length; index++) {
+                                _this.commit.diff.files[index].added.changes = _this.mapObjectToList(_this.commit.diff.files[index].added.changes);
+                                _this.commit.diff.files[index].removed.changes = _this.mapObjectToList(_this.commit.diff.files[index].removed.changes);
+                            }
                         }
                         else {
                             _this.errors = result.errors;
                         }
                     }, function (errors) { return _this.errors = errors; });
+                };
+                /**
+                 * Map object into array
+                 * @param object
+                 */
+                ProjectGitCommitComponent.prototype.mapObjectToList = function (object) {
+                    var array = [];
+                    // Iterate through each key
+                    for (var key in object) {
+                        array.push({
+                            name: key,
+                            value: object[key]
+                        });
+                    }
+                    return array;
                 };
                 ProjectGitCommitComponent = __decorate([
                     core_1.Component({

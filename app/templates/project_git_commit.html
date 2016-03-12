@@ -22,4 +22,76 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="commit">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Code changes analysis</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="toolsPanel" class="tools-panel">
+                <div class="tool-item dropdown">
+                    Show:
+                    <span class="text-selection" id="dropdownNumberOfItemsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{toolsPanel.show}}
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownNumberOfItemsMenu">
+                        <li><a (click)="showToolItem_itemSelected('all', 'All')">All</a></li>
+                        <li><a (click)="showToolItem_itemSelected('changes', 'File changes')">File changes</a></li>
+                        <li><a (click)="showToolItem_itemSelected('analysis', 'Analysis')">Analysis</a></li>
+                        <li><a href="#">Code characteristics</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Iterate through changes files -->
+    <div *ngFor="#file of commit.diff.files">
+        <!-- Tools bar -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tools-panel">
+                    <span class="tool-item">{{file.name}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <!-- LINES OF CODE -->
+                    <div [hidden]="!showLinesOfCode">
+                        <!-- Added lines -->
+                        <table class="lines-list added">
+                            <tr *ngFor="#line of file.added.lines">
+                                <td>{{line}}</td>
+                            </tr>
+                        </table>
+                        <!-- Removed lines -->
+                        <table class="lines-list removed">
+                            <tr *ngFor="#line of file.removed.lines">
+                                <td>{{line}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- ANALYSIS -->
+                    <div [hidden]="!showCodeAnalysis">
+                        <table class="analysis-list selectable">
+                            <tr *ngFor="#change of file.added.changes; #i = index">
+                                <td>{{change.name}}</td>
+                                <td class="added value">{{file.added.changes[i].value}}</td>
+                                <td class="removed value">{{file.removed.changes[i].value}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endraw %}

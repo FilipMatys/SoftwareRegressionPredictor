@@ -27,7 +27,9 @@ class CodeAnalyzer(object):
     def analyze(self):
         # Init object for added and removed characteristics
         added = self.initializeDifferenceObject()
+        addedLines = []
         removed = self.initializeDifferenceObject()
+        removedLines = []
 
         # Iterate through changed lines
         for (old, new, row) in self.fileDiff[1]:
@@ -35,13 +37,19 @@ class CodeAnalyzer(object):
             if new is None:
                 removed[self.LINE] += 1
                 removed = self.analyzeRow(row, removed)
+                removedLines.append(row)
             # Added line
             if old is None:
                 added[self.LINE] += 1
                 added = self.analyzeRow(row, added)
+                addedLines.append(row)
         
         # Return added and removed characteristics
-        return added, removed      
+        return {
+            "name": self.fileDiff[0][3], 
+            "added": { "changes": added, "lines": addedLines },
+            "removed": { "changes": removed, "lines": removedLines }
+        }      
        
     """ Analyze row """
     def analyzeRow(self, row, difference):

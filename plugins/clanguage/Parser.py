@@ -24,7 +24,7 @@ class Parser(object):
             file = self.parseFileChanges(diff)
 
             # Add file changes to overall diff
-            changes.addFile(file.getVars())
+            changes.addFile(file)
 
         return changes
 

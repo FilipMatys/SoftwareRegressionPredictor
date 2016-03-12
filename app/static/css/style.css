@@ -152,8 +152,32 @@ div.side-content .content {
 }
 
 div.diff-list table,
-div.git-list table {
+div.git-list table,
+table.lines-list,
+table.analysis-list {
     width: 100%;
+}
+
+table.lines-list.added {
+    border-left: solid 0.5rem #498205;
+}
+
+table.lines-list.removed {
+    border-left: solid 0.5rem #DA3B01;
+}
+
+table.analysis-list td.value {
+    width: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+table.analysis-list td.value.added {
+    background: #AEC593;
+}
+
+table.analysis-list td.value.removed {
+    background: #E8A991;
 }
 
 div.git-list table tr td:first-child,
@@ -163,7 +187,9 @@ div.git-list table tr td:last-child  {
 
 div.diff-list table td,
 div.diff-list table th,
-div.git-list table td {
+div.git-list table td,
+table.lines-list td,
+table.analysis-list td {
     padding: 1.5rem;
     color: black;
 }
@@ -185,12 +211,15 @@ div.git-list a {
 
 div.diff-list table tr:nth-child(odd),
 div.git-list a:nth-child(odd),
-div.git-list.single table {
+div.git-list.single table,
+table.lines-list tr:nth-child(odd),
+table.analysis-list tr:nth-child(odd) {
     background: #F2F2F2
 
 }
 
-div.git-list.selectable a:hover {
+div.git-list.selectable a:hover,
+table.analysis-list.selectable tr:hover {
     background: #C3C3C3;
     text-decoration: none;
 }
