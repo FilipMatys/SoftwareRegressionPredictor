@@ -167,16 +167,23 @@ table.lines-list.removed {
 }
 
 table.analysis-list td.value {
-    width: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    width: 6rem;
+    text-align: center;
 }
 
 table.analysis-list td.value.added {
+    background: #D6E1C8;
+}
+
+table.analysis-list td.value.added.non-zero {
     background: #AEC593;
 }
 
 table.analysis-list td.value.removed {
+    background: #F0C8B9;
+}
+
+table.analysis-list td.value.removed.non-zero {
     background: #E8A991;
 }
 

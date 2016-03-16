@@ -83,8 +83,8 @@
                         <table class="analysis-list selectable">
                             <tr *ngFor="#change of file.added.changes; #i = index">
                                 <td>{{change.name}}</td>
-                                <td class="added value">{{file.added.changes[i].value}}</td>
-                                <td class="removed value">{{file.removed.changes[i].value}}</td>
+                                <td class="added value" [ngClass]="{'non-zero': file.added.changes[i].value}">{{file.added.changes[i].value}}</td>
+                                <td class="removed value" [ngClass]="{'non-zero': file.removed.changes[i].value}">{{file.removed.changes[i].value}}</td>
                             </tr>
                         </table>
                     </div>
