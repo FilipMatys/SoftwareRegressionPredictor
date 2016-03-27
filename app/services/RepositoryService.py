@@ -44,22 +44,35 @@ class RepositoryService(object):
 
         return ValidationResult([CommitWrap(n).getVars() for n in gitWrap.log(number)])
         
-
-    def getCommit(project_id, hash):
+    """ Get revision information by project """
+    def getCommitByProject(project_id, revision):
         # Load project from internal database
         project = models.Project.query.filter_by(id=project_id).first()
 
+        # Get commit and changes within a result      
+        return RepositoryService.getCommitByRepository(project.repository, revision + "^" ,revision)
+
+    def getCommitByRepository(repository, prevRevision, revision):
         # Init git wrap
-        gitWrap = GitWrap(project.repository, config.REPOSITORIES)
+        gitWrap = GitWrap(repository, config.REPOSITORIES)
         gitWrap.init()
 
         # Load commit
-        commit = gitWrap.get_commit(hash)
+        commit = gitWrap.get_commit(revision)
         commitWrap = CommitWrap(commit)
 
         # Get commit changes
-        parser = Parser(gitWrap, hash)
-        commitWrap.diff = parser.run().getVars() 
+        commitWrap.diff = RepositoryService.getRevisionDifference(repository, prevRevision, revision).data; 
        
         # Return result
         return ValidationResult(commitWrap.getVars())
+
+    """ Get difference of two revisions """
+    def getRevisionDifference(repository, prevRevision, revision):
+        # Init git wrap
+        gitWrap = GitWrap(repository, config.REPOSITORIES)
+        gitWrap.init()
+        
+        # Get commit changes
+        parser = Parser(gitWrap, prevRevision, revision)
+        return ValidationResult(parser.run().getVars())

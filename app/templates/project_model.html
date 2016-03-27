@@ -2,7 +2,15 @@
 <div class="row">
     <div class="col-md-12">
         <div class="tools-panel">
-            <span class="tool-item">Some tools</span>
+            <span class="tool-item"><a (click)="createModel()" class="action">Create classification models</a></span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tools-panel">
+            <span class="tool-item single"><input type="text" placeholder="Search" [(ngModel)]="term"/></span>
         </div>
     </div>
 </div>
@@ -10,6 +18,17 @@
 <div class="row">
     <div class="col-md-12">
         <div class="content">
+            <table class="model-list selectable">
+                <tbody *ngFor="#model of models | modelSearch:term">
+                    <tr [ngClass]="{'active': model.active}" (click)="model.active = !model.active">
+                        <td>{{model.name}}</td>
+                        <td>{{model.accuracy | percent:'.2-2'}}</td>
+                    </tr>
+                    <tr class="content" *ngIf="model.active">
+                        <td colspan="2">Detail of model. Includes information about precision and... let us hope, ROC chart.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

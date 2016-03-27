@@ -2,3 +2,4 @@ __pycache__
 app/static/node_modules
 app/static/typings
 utils/__pycache__
+classifiers

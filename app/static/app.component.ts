@@ -5,6 +5,7 @@ import { RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angula
 import { ProjectsComponent } from './projects.component';
 import { ProjectService } from './services/project.service';
 import { RepositoryService } from './services/repository.service';
+import { ModelService } from './services/model.service';
 import { ProjectDetailComponent } from './module.project/project-detail.component';
 
 @Component({
@@ -15,7 +16,8 @@ import { ProjectDetailComponent } from './module.project/project-detail.componen
         ROUTER_PROVIDERS,
         HTTP_PROVIDERS,
         ProjectService,
-        RepositoryService
+        RepositoryService,
+        ModelService
     ]
 })
 

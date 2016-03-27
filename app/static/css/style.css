@@ -63,11 +63,23 @@ span.desc {
 
 div.tools-panel {
     padding: 1rem;
+    padding-right: 0rem;
     color: black;
 }
 
 div.tools-panel .tool-item {
     margin-right: 2rem;
+}
+
+div.tools-panel .tool-item.single {
+    margin-right: 0rem;
+}
+
+div.tools-panel .tool-item input {
+    padding: 0.5rem 1rem;
+    border: solid 0.25rem #949494;
+    width: 100%;
+    outline-color: #CF7934;
 }
 
 div.dropdown {
@@ -84,12 +96,14 @@ div .dropdown-menu>li>a {
     padding: 1rem 2rem;
 }
 
+div.tools-panel .tool-item .action,
 span.text-selection {
     cursor: pointer;
 }
 
 span.active-text,
-div.tools-panel span.text-selection {
+div.tools-panel span.text-selection,
+div.tools-panel .tool-item .action {
     color: #CF7934;
 }
 
@@ -154,7 +168,8 @@ div.side-content .content {
 div.diff-list table,
 div.git-list table,
 table.lines-list,
-table.analysis-list {
+table.analysis-list,
+table.model-list {
     width: 100%;
 }
 
@@ -192,11 +207,19 @@ div.git-list table tr td:last-child  {
     width: 20%;
 }
 
+table.model-list tr:first-child td:last-child {
+    width: 10%;
+    text-align: right;
+    font-size: 1.25rem;
+    color: #616161;
+}
+
 div.diff-list table td,
 div.diff-list table th,
 div.git-list table td,
 table.lines-list td,
-table.analysis-list td {
+table.analysis-list td,
+table.model-list td {
     padding: 1.5rem;
     color: black;
 }
@@ -206,6 +229,7 @@ div.git-list table td.comment {
     color: #616161;
 }
 
+table.model-list tbody:nth-child(even)
 div.diff-list table tr:nth-child(even),
 div.git-list table:nth-child(even) {
     background: #FFF
@@ -220,15 +244,31 @@ div.diff-list table tr:nth-child(odd),
 div.git-list a:nth-child(odd),
 div.git-list.single table,
 table.lines-list tr:nth-child(odd),
-table.analysis-list tr:nth-child(odd) {
+table.analysis-list tr:nth-child(odd),
+table.model-list tbody:nth-child(odd) {
     background: #F2F2F2
 
 }
 
+
 div.git-list.selectable a:hover,
-table.analysis-list.selectable tr:hover {
+table.analysis-list.selectable tr:hover,
+table.model-list.selectable tr:hover {
     background: #C3C3C3;
     text-decoration: none;
+}
+
+table.model-list.selectable tr.active {
+    background: #CF7934;
+    color: white;
+}
+
+table.model-list.selectable tr.active td {
+    color: white;
+}
+
+table.model-list tr.content {
+    background: white;
 }
 
 div.diff-list table td.thumb {

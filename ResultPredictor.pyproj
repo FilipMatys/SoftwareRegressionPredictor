@@ -25,6 +25,9 @@
     <Compile Include="app\resources.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="app\services\ModelService.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\services\ProjectService.py">
       <SubType>Code</SubType>
     </Compile>
@@ -85,6 +88,7 @@
     <Folder Include="app\static\js\" />
     <Folder Include="app\static\module.project\" />
     <Folder Include="app\static\models\" />
+    <Folder Include="app\static\pipes\" />
     <Folder Include="app\static\services\" />
     <Folder Include="app\static\node_modules\" />
     <Folder Include="app\static\node_modules\.bin\" />
@@ -14567,6 +14571,8 @@
     <Content Include="app\static\node_modules\zone.js\package.json" />
     <Content Include="app\static\node_modules\zone.js\README.md" />
     <Content Include="app\static\package.json" />
+    <Content Include="app\static\pipes\model-search.pipe.ts" />
+    <Content Include="app\static\services\model.service.ts" />
     <Content Include="app\static\services\project.service.ts" />
     <Content Include="app\static\models\project.ts" />
     <Content Include="app\static\projects.component.ts" />

@@ -69,7 +69,7 @@ class ProjectService(object):
             validationResult.addError("Failed to load projects from ResultCloud repository")
 
             # Return result
-            return jsonify(validationResult.getVars())
+            return validationResult
         else:
             # Load was successful
             externalProjects = resultCloud.last_response['Result']
@@ -78,7 +78,7 @@ class ProjectService(object):
             for project in externalProjects:
                 if not models.Project.query.filter_by(ext_id=project["Id"]).first():
                     new_project = models.Project(project["Id"], project["Name"], project["GitRepository"])
-                    self.save(new_project)
+                    ProjectService.save(new_project)
 
             # Load internal projects
             internalProjects = models.Project.query.all()

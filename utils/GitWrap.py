@@ -22,8 +22,8 @@ class GitWrap:
     def get_commit(self, hash):
         return self.repo.commit(hash)
 
-    def get_commit_diff(self, hash):
-        return self.repo.git.diff(hash + '^', hash)
+    def get_commit_diff(self, previous_revision, revision):
+        return self.repo.git.diff(previous_revision, revision)
 
     """ Clone new repository and init repository object """
     def clone(self):

@@ -2,6 +2,19 @@ from flask import jsonify, request
 from flask.ext.restful import Api, Resource
 from app.services.ProjectService import ProjectService
 from app.services.RepositoryService import RepositoryService
+from app.services.ModelService import ModelService
+
+""" Model creation resource """
+class ModelCreationResource(Resource):
+    # Create model
+    def get(self, project_id):
+        return jsonify(ModelService.create(project_id).getVars());
+
+""" Model load resource """
+class ModelLoadResource(Resource):
+    # Load model
+    def get(self, project_id):
+        return jsonify(ModelService.load(project_id).getVars());
 
 """ Project resource """
 class ProjectResource(Resource):
@@ -34,5 +47,5 @@ class RepositoryLogResource(Resource):
 """ Repository commit resource """
 class RepositoryCommitResource(Resource):
     def get(self, project_id, hash):
-        return jsonify(RepositoryService.getCommit(project_id, hash).getVars())      
+        return jsonify(RepositoryService.getCommitByProject(project_id, hash).getVars())      
 
