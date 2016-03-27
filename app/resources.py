@@ -4,6 +4,12 @@ from app.services.ProjectService import ProjectService
 from app.services.RepositoryService import RepositoryService
 from app.services.ModelService import ModelService
 
+""" Model prediction resource """
+class ModelPredictionResource(Resource):
+    # Make prediction
+    def get(self, project_id, revision):
+        return jsonify(ModelService.predict(project_id, revision).getVars())
+
 """ Model creation resource """
 class ModelCreationResource(Resource):
     # Create model

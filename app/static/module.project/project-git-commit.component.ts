@@ -4,6 +4,7 @@ import { RouteParams } from 'angular2/router';
 import { Project } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { RepositoryService } from '../services/repository.service';
+import { ModelService } from '../services/model.service';
 
 @Component({
     selector: 'project-git-commit',
@@ -15,6 +16,7 @@ export class ProjectGitCommitComponent implements OnInit {
     public project: Project;
     public commit: any;
     public errors: string[];
+    public changes: any[];
 
     public toolsPanel: {
         show: string
@@ -25,15 +27,18 @@ export class ProjectGitCommitComponent implements OnInit {
     constructor(
         private _routeParams: RouteParams,
         private _projectService: ProjectService,
+        private _modelService: ModelService,
         private _repositoryService: RepositoryService) {
         this.project = this._projectService.currentProject;
         this.toolsPanel = {
             show: 'All'
-        }
+        };
+        this.changes = [];
     }
 
     ngOnInit() {
         this.getLog(Number(this.project.id), this._routeParams.get('hash'));
+        this.makePrediction(Number(this.project.id), this._routeParams.get('hash'));
     }
 
     /**
@@ -62,6 +67,22 @@ export class ProjectGitCommitComponent implements OnInit {
 
         // Set label
         this.toolsPanel.show = label;
+    }
+
+    makePrediction(projectId: number, hash: string) {
+        this._modelService.predict(projectId, hash).subscribe(
+            result => {
+                // Check if result is valid
+                if (result.isValid) {
+                    this.changes = result.data; 
+                }
+                // Something went wrong
+                else {
+                    this.errors = result.errors;
+                }
+            },
+            errors => this.errors = errors
+        );
     }
 
     getLog(projectId: number, hash: string) {

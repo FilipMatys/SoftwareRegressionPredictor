@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/project.service', '../services/repository.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../services/project.service', '../services/repository.service', '../services/model.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, project_service_1, repository_service_1;
+    var core_1, router_1, project_service_1, repository_service_1, model_service_1;
     var ProjectGitCommitComponent;
     return {
         setters:[
@@ -25,12 +25,16 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
             },
             function (repository_service_1_1) {
                 repository_service_1 = repository_service_1_1;
+            },
+            function (model_service_1_1) {
+                model_service_1 = model_service_1_1;
             }],
         execute: function() {
             ProjectGitCommitComponent = (function () {
-                function ProjectGitCommitComponent(_routeParams, _projectService, _repositoryService) {
+                function ProjectGitCommitComponent(_routeParams, _projectService, _modelService, _repositoryService) {
                     this._routeParams = _routeParams;
                     this._projectService = _projectService;
+                    this._modelService = _modelService;
                     this._repositoryService = _repositoryService;
                     this.showLinesOfCode = true;
                     this.showCodeAnalysis = true;
@@ -38,9 +42,11 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                     this.toolsPanel = {
                         show: 'All'
                     };
+                    this.changes = [];
                 }
                 ProjectGitCommitComponent.prototype.ngOnInit = function () {
                     this.getLog(Number(this.project.id), this._routeParams.get('hash'));
+                    this.makePrediction(Number(this.project.id), this._routeParams.get('hash'));
                 };
                 /**
                  * Show items based on selected value
@@ -67,6 +73,18 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                     }
                     // Set label
                     this.toolsPanel.show = label;
+                };
+                ProjectGitCommitComponent.prototype.makePrediction = function (projectId, hash) {
+                    var _this = this;
+                    this._modelService.predict(projectId, hash).subscribe(function (result) {
+                        // Check if result is valid
+                        if (result.isValid) {
+                            _this.changes = result.data;
+                        }
+                        else {
+                            _this.errors = result.errors;
+                        }
+                    }, function (errors) { return _this.errors = errors; });
                 };
                 ProjectGitCommitComponent.prototype.getLog = function (projectId, hash) {
                     var _this = this;
@@ -105,7 +123,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                         selector: 'project-git-commit',
                         templateUrl: 'project_git_commit'
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, project_service_1.ProjectService, repository_service_1.RepositoryService])
+                    __metadata('design:paramtypes', [router_1.RouteParams, project_service_1.ProjectService, model_service_1.ModelService, repository_service_1.RepositoryService])
                 ], ProjectGitCommitComponent);
                 return ProjectGitCommitComponent;
             }());

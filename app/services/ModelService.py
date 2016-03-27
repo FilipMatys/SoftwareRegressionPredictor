@@ -129,6 +129,48 @@ class ModelService(object):
         # Return validation
         return validation
 
+    """ Fill features with data """
+    def _fillFeatures(features, changes):
+        sample = []
+        # Load each feature from changes
+        for feature in features:
+            if feature in changes:
+                sample.append(changes[feature])
+            else:
+                sample.append(0)
+
+        # Return sample
+        return sample
+
+    """ Predict which test cases are most likely to change """
+    def predict(project_id, revision):
+        # Init validation
+        validation = ValidationResult([]);
+
+        # Load project
+        projectValidation = ProjectService.getDetail(project_id);
+
+        # Get changes of given revision
+        submissionValidation = RepositoryService.getRevisionDifference(projectValidation.data["repository"], revision + "^", revision)
+        # We need one dimensional change analysis
+        changes = ModelService._diffObjectToSample(submissionValidation.data)
+
+        # And now load classifiers
+        classifiers = ModelService._loadClassifiers("project_" + project_id)
+
+        # For each classifier check, if there is a chance for change
+        for key in classifiers:
+            # Map changes into values array
+            X = ModelService._fillFeatures(classifiers[key]["features"], changes)
+
+            # Check prediction
+            prediction = classifiers[key]["model"].predict([X])[0]
+            if prediction is 1:
+                validation.data.append(classifiers[key]["name"])
+
+        # Return validation
+        return validation
+
     """ Create model for project """
     def create(project_id):
         # Get detail about project

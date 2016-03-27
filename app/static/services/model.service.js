@@ -35,6 +35,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                // Make prediction
+                ModelService.prototype.predict = function (projectId, revision) {
+                    return this.http.get(this._modelURL + "/" + projectId + "/predict/" + revision)
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 // Load model for project
                 ModelService.prototype.load = function (projectId) {
                     return this.http.get(this._modelURL + "/" + projectId + "/load")
