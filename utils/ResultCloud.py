@@ -39,8 +39,8 @@ class ResultCloud:
         resp = self.send_request('submissions', 'getList', {"project": projectId})
         return self.check_valid(resp)
 
-    def get_submission_by_hash(self, hash):
-        resp = self.send_request("submissions", "getByHash", {"hash" : hash})
+    def get_submission_by_id(self, id):
+        resp = self.send_request("submissions", "get", {"id" : id})
         return self.check_valid(resp)
 
     def get_project(self, project_id):

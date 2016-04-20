@@ -74,5 +74,7 @@ class RepositoryService(object):
         gitWrap.init()
         
         # Get commit changes
-        parser = Parser(gitWrap, prevRevision, revision)
-        return ValidationResult(parser.run().getVars())
+        patch = gitWrap.get_commit_diff(prevRevision, revision)
+
+        # Parse patch
+        return ValidationResult(Parser.run(patch).getVars())

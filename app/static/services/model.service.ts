@@ -11,6 +11,11 @@ export class ModelService {
 
     private _modelURL = 'api/model';
 
+    // Get URL for prediction over file
+    getFilePredictionUrl(projectId: number): string {
+        return this._modelURL + "/" + projectId + "/predict/file";
+    }
+
     // Create model for project
     create(projectId: number) {
         return this.http.get(this._modelURL + "/" + projectId + "/create")

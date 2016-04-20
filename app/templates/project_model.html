@@ -25,7 +25,48 @@
                         <td>{{model.accuracy | percent:'.2-2'}}</td>
                     </tr>
                     <tr class="content" *ngIf="model.active">
-                        <td colspan="2">Detail of model. Includes information about precision and... let us hope, ROC chart.</td>
+                        <td colspan="2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div>
+                                        <table class="model-detail">
+                                            <thead>
+                                                <tr>
+                                                    <td><h3>Models</h3></td>
+                                                    <td class="header">Precision</td>
+                                                    <td class="header">Recall</td>
+                                                    <td class="header">Accuracy</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="#classifier of model.models">
+                                                <tr>
+                                                    <td>{{classifier.name}}</td>
+                                                    <td class="value">{{classifier.precision | percent:'.2-2'}}</td>
+                                                    <td class="value">{{classifier.recall | percent:'.2-2'}}</td>
+                                                    <td class="value">{{classifier.accuracy | percent:'.2-2'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="model-detail">
+                                            <thead>
+                                                <tr>
+                                                    <td><h3>Features</h3></td>
+                                                    <td class="header">File</td>
+                                                    <td class="header">Added/Removed</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="#feature of model.features">
+                                                <tr>
+                                                    <td>{{feature.change}}</td>
+                                                    <td class="value">{{feature.file}}</td>
+                                                    <td class="value">{{feature.state}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

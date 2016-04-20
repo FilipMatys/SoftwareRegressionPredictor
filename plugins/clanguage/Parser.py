@@ -5,24 +5,20 @@ from plugins.clanguage.CodeAnalyzer import CodeAnalyzer
 import whatthepatch
 
 class Parser(object):
-    def __init__(self, repo, prevRevision, revision):
-        self.repo = repo
-        self.prevRevision = prevRevision
-        self.revision = revision
-
-    def run(self):
+    """ Run parser """
+    def run(patch):
         # Initialize changes
         changes = CommitDiff()
         
         # Parse each file
-        for diff in whatthepatch.parse_patch(self.repo.get_commit_diff(self.prevRevision, self.revision)):
+        for diff in whatthepatch.parse_patch(patch):
             # Check file extenstion for .c or .h
             filename = diff[0][3]
-            if not self.checkFileExtension(filename):
+            if not Parser.checkFileExtension(filename):
                 continue
 
             # Create new file diff
-            file = self.parseFileChanges(diff)
+            file = Parser.parseFileChanges(diff)
 
             # Add file changes to overall diff
             changes.addFile(file)
@@ -30,12 +26,12 @@ class Parser(object):
         return changes
 
     """ Check file extension """
-    def checkFileExtension(self, filename):
+    def checkFileExtension(filename):
         lastTwoCharacters = filename[-2:]
         return (lastTwoCharacters == ".c" or lastTwoCharacters == ".h")
 
     """ Parse file """
-    def parseFileChanges(self, fileDiff):
+    def parseFileChanges(fileDiff):
         # Analyze changes
         codeAnalyzer = CodeAnalyzer(fileDiff)
         return codeAnalyzer.analyze()

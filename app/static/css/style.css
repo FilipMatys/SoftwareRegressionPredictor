@@ -79,7 +79,7 @@ div.tools-panel .tool-item input {
     padding: 0.5rem 1rem;
     border: solid 0.25rem #949494;
     width: 100%;
-    outline-color: #CF7934;
+    outline: none;
 }
 
 div.dropdown {
@@ -105,6 +105,19 @@ span.active-text,
 div.tools-panel span.text-selection,
 div.tools-panel .tool-item .action {
     color: #CF7934;
+}
+
+button {
+    background: #cccccc;
+    color: black;
+    border: none;
+    padding: 0.5rem 2rem;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+button:hover {
+    box-shadow: inset 0 0 0 2px #7a7a7a;
 }
 
 img.back-button {
@@ -169,7 +182,8 @@ div.diff-list table,
 div.git-list table,
 table.lines-list,
 table.analysis-list,
-table.model-list {
+table.model-list,
+table.model-detail {
     width: 100%;
 }
 
@@ -207,11 +221,31 @@ div.git-list table tr td:last-child  {
     width: 20%;
 }
 
-table.model-list tr:first-child td:last-child {
+table.model-list>tbody>tr:first-child td:last-child {
     width: 10%;
     text-align: right;
     font-size: 1.25rem;
     color: #616161;
+}
+
+table thead tr {
+    background: white !important;
+}
+
+table thead tr h3 {
+    padding-left: 0rem;
+    margin-bottom: 0rem;
+}
+
+table thead td.header {
+    text-align: right;
+    font-size: 1.25rem;
+    color: #616161;
+    vertical-align: bottom;
+}
+
+table.model-detail td.value {
+    text-align: right;
 }
 
 div.diff-list table td,
@@ -253,9 +287,10 @@ table.model-list tbody:nth-child(odd) {
 
 div.git-list.selectable a:hover,
 table.analysis-list.selectable tr:hover,
-table.model-list.selectable tr:hover {
+table.model-list.selectable tbody tr:first-child:hover {
     background: #C3C3C3;
     text-decoration: none;
+    cursor: pointer;
 }
 
 table.model-list.selectable tr.active {
@@ -264,11 +299,15 @@ table.model-list.selectable tr.active {
 }
 
 table.model-list.selectable tr.active td {
-    color: white;
+    color: white !important;
 }
 
 table.model-list tr.content {
     background: white;
+}
+
+table.model-list tr.content>td {
+    padding-bottom: 5rem;
 }
 
 div.diff-list table td.thumb {

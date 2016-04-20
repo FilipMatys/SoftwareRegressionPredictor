@@ -6,9 +6,13 @@ from app.services.ModelService import ModelService
 
 """ Model prediction resource """
 class ModelPredictionResource(Resource):
-    # Make prediction
+    # Make prediction for revision
     def get(self, project_id, revision):
-        return jsonify(ModelService.predict(project_id, revision).getVars())
+        return jsonify(ModelService.predictForRevision(project_id, revision).getVars())
+
+    # Make prediction for file
+    def post(self, project_id, revision):
+        return jsonify(ModelService.predictForPatchFile(project_id, request.files["file"]).getVars())
 
 """ Model creation resource """
 class ModelCreationResource(Resource):

@@ -23,7 +23,10 @@ class GitWrap:
         return self.repo.commit(hash)
 
     def get_commit_diff(self, previous_revision, revision):
-        return self.repo.git.diff(previous_revision, revision)
+        content = self.repo.git.execute(['git', 'diff', '%s' % (previous_revision),'%s' %  (revision)], stdout_as_string=False)
+
+        result = chardet.detect(content)
+        return content.decode(encoding=result['encoding'])
 
     """ Clone new repository and init repository object """
     def clone(self):

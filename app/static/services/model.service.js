@@ -29,6 +29,10 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     this.http = http;
                     this._modelURL = 'api/model';
                 }
+                // Get URL for prediction over file
+                ModelService.prototype.getFilePredictionUrl = function (projectId) {
+                    return this._modelURL + "/" + projectId + "/predict/file";
+                };
                 // Create model for project
                 ModelService.prototype.create = function (projectId) {
                     return this.http.get(this._modelURL + "/" + projectId + "/create")
