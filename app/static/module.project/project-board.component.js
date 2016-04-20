@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-upload/ng2-file-upload', '../services/project.service', '../services/model.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-upload/ng2-file-upload', '../services/project.service', '../services/model.service', '../services/alert.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-u
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, ng2_file_upload_1, project_service_1, model_service_1;
+    var core_1, common_1, ng2_file_upload_1, project_service_1, model_service_1, alert_service_1;
     var ProjectBoardComponent;
     return {
         setters:[
@@ -28,17 +28,22 @@ System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-u
             },
             function (model_service_1_1) {
                 model_service_1 = model_service_1_1;
+            },
+            function (alert_service_1_1) {
+                alert_service_1 = alert_service_1_1;
             }],
         execute: function() {
             ProjectBoardComponent = (function () {
-                function ProjectBoardComponent(_projectService, _modelService) {
+                function ProjectBoardComponent(_projectService, _modelService, _alertService) {
                     this._projectService = _projectService;
                     this._modelService = _modelService;
+                    this._alertService = _alertService;
                     this.project = this._projectService.currentProject;
                     this.initUploader();
                 }
                 // Initialize uploader object and its properties
                 ProjectBoardComponent.prototype.initUploader = function () {
+                    var _this = this;
                     // Init uploader
                     this.uploader = new ng2_file_upload_1.FileUploader({
                         url: this._modelService.getFilePredictionUrl(this.project.id)
@@ -47,7 +52,7 @@ System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-u
                     this.uploader.queueLimit = 1;
                     // On successful upload, call this function
                     this.uploader.onSuccessItem = function (item, response, status, header) {
-                        console.log(response);
+                        _this._alertService.showAlert(JSON.parse(response), "Failed to make prediction", null);
                     };
                 };
                 // Make prediction for file
@@ -60,7 +65,7 @@ System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-u
                         templateUrl: 'project_board',
                         directives: [ng2_file_upload_1.FILE_UPLOAD_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [project_service_1.ProjectService, model_service_1.ModelService])
+                    __metadata('design:paramtypes', [project_service_1.ProjectService, model_service_1.ModelService, alert_service_1.AlertService])
                 ], ProjectBoardComponent);
                 return ProjectBoardComponent;
             }());

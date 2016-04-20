@@ -1,5 +1,6 @@
 ﻿export interface ValidationResult {
     data: any,
-    errors: any[],
+    errors: string[],
+    warnings: string[],
     isValid: boolean
 }

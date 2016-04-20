@@ -26,6 +26,43 @@
     margin-top: 5rem;
 }
 
+div.alert {
+    padding: 15px;
+    background: #1f1408;
+    color: white;
+    border: none;
+    border-radius: 0rem;
+    margin-bottom: 0rem;
+    position: relative;
+}
+
+div.alert span.header {
+    font-size: 1.5rem;
+}
+
+div.alert ul {
+    padding-left: 0rem;
+    margin-top: 1rem;
+    color: #cccccc;
+    list-style-type: none;
+    font-weight: 300;
+}
+
+div.alert button.close {
+    padding: 1rem;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    margin-top: 0rem;
+}
+
+div.alert button:hover {
+    box-shadow: none;
+    opacity: 0.8;
+}
+
 ul.win-list {
     list-style-type: none;
     padding-left: 0px;

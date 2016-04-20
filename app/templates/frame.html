@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-default navbar-fixed-top">
+﻿{% raw %}
+<nav class="navbar navbar-default navbar-fixed-top">
     <img (click)="goHome()" class="back-button" src="static/img/Home-64.png" />
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,5 +9,13 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="main-view">
+    <div *ngIf="_alert" class="alert">
+        <button (click)="_closeAlert()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="header">{{_alert.message}}</span>
+        <ul *ngIf="_alert.messages && _alert.messages.length">
+            <li *ngFor="#item of _alert.messages">{{item}}</li>
+        </ul>
+    </div>
     <router-outlet></router-outlet>
 </div>
+{% endraw %}

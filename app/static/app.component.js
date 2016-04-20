@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'angular2/router', './projects.component', './services/project.service', './services/repository.service', './services/model.service', './module.project/project-detail.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/alert', './projects.component', './services/project.service', './services/repository.service', './services/model.service', './services/alert.service', './module.project/project-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './project
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, projects_component_1, project_service_1, repository_service_1, model_service_1, project_detail_component_1;
+    var core_1, http_1, router_1, alert_1, projects_component_1, project_service_1, repository_service_1, model_service_1, alert_service_1, project_detail_component_1;
     var AppComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './project
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (alert_1_1) {
+                alert_1 = alert_1_1;
             },
             function (projects_component_1_1) {
                 projects_component_1 = projects_component_1_1;
@@ -35,6 +38,9 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './project
             function (model_service_1_1) {
                 model_service_1 = model_service_1_1;
             },
+            function (alert_service_1_1) {
+                alert_service_1 = alert_service_1_1;
+            },
             function (project_detail_component_1_1) {
                 project_detail_component_1 = project_detail_component_1_1;
             }],
@@ -46,6 +52,29 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './project
                 AppComponent.prototype.goHome = function () {
                     this._router.navigate(['Projects']);
                 };
+                // Show messages via alert and 
+                AppComponent.prototype._showAlert = function (messages, message) {
+                    // Initialize alert object
+                    this._alert = new alert_1.ApplicationAlert();
+                    this._alert.messages = messages;
+                    this._alert.message = message;
+                };
+                // Close alert by setting to null
+                AppComponent.prototype._closeAlert = function () {
+                    this._alert = null;
+                };
+                // Show errors via alert object
+                AppComponent.prototype.showErrors = function (errors, message) {
+                    this._showAlert(errors, message);
+                };
+                // Show warnings via alert object
+                AppComponent.prototype.showWarnings = function (warnings, message) {
+                    this._showAlert(warnings, message);
+                };
+                // Show success via alert object
+                AppComponent.prototype.showSuccess = function (message) {
+                    this._showAlert([], message);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
@@ -56,7 +85,8 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './project
                             http_1.HTTP_PROVIDERS,
                             project_service_1.ProjectService,
                             repository_service_1.RepositoryService,
-                            model_service_1.ModelService
+                            model_service_1.ModelService,
+                            alert_service_1.AlertService
                         ]
                     }),
                     router_1.RouteConfig([
