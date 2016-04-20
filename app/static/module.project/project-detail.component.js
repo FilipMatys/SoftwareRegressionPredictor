@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/project.service', './project-board.component', './project-settings.component', './project-git.component', './project-model.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../services/project.service', '../services/model.service', './project-board.component', './project-settings.component', './project-git.component', './project-model.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, project_service_1, project_board_component_1, project_settings_component_1, project_git_component_1, project_model_component_1;
+    var core_1, router_1, project_service_1, model_service_1, project_board_component_1, project_settings_component_1, project_git_component_1, project_model_component_1;
     var ProjectDetailComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
             },
             function (project_service_1_1) {
                 project_service_1 = project_service_1_1;
+            },
+            function (model_service_1_1) {
+                model_service_1 = model_service_1_1;
             },
             function (project_board_component_1_1) {
                 project_board_component_1 = project_board_component_1_1;
@@ -37,14 +40,30 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
             }],
         execute: function() {
             ProjectDetailComponent = (function () {
-                function ProjectDetailComponent(_router, _routeParams, _projectService) {
+                function ProjectDetailComponent(_router, _routeParams, _projectService, _modelService) {
                     this._router = _router;
                     this._routeParams = _routeParams;
                     this._projectService = _projectService;
+                    this._modelService = _modelService;
                 }
                 ProjectDetailComponent.prototype.ngOnInit = function () {
                     this.getProject(Number(this._routeParams.get('id')));
+                    this.checkIfModelExists(Number(this._routeParams.get('id')));
                 };
+                // Check model exists
+                ProjectDetailComponent.prototype.checkIfModelExists = function (id) {
+                    var _this = this;
+                    this._modelService.exists(id).subscribe(function (result) {
+                        // Check if result is valid
+                        if (result.isValid) {
+                            _this._modelService.hasModel = result.data["exists"];
+                        }
+                        else {
+                            _this.errors = result.errors;
+                        }
+                    }, function (errors) { return _this.errors = errors; });
+                };
+                // Get project
                 ProjectDetailComponent.prototype.getProject = function (id) {
                     var _this = this;
                     this._projectService.getProject(id).subscribe(function (result) {
@@ -90,7 +109,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                             component: project_settings_component_1.ProjectSettingsComponent
                         }
                     ]), 
-                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, project_service_1.ProjectService])
+                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, project_service_1.ProjectService, model_service_1.ModelService])
                 ], ProjectDetailComponent);
                 return ProjectDetailComponent;
             }());

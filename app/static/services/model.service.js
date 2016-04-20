@@ -51,6 +51,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                // Check if project has existing model
+                ModelService.prototype.exists = function (projectId) {
+                    return this.http.get(this._modelURL + "/" + projectId + "/exists")
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 // Handle error
                 ModelService.prototype.handleError = function (error) {
                     return Observable_1.Observable.throw(error.json().error || 'Server error');

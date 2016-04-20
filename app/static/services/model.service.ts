@@ -11,6 +11,8 @@ export class ModelService {
 
     private _modelURL = 'api/model';
 
+    public hasModel: boolean;
+
     // Get URL for prediction over file
     getFilePredictionUrl(projectId: number): string {
         return this._modelURL + "/" + projectId + "/predict/file";
@@ -33,6 +35,13 @@ export class ModelService {
     // Load model for project
     load(projectId: number) {
         return this.http.get(this._modelURL + "/" + projectId + "/load")
+            .map(res => <ValidationResult>res.json())
+            .catch(this.handleError);
+    }
+
+    // Check if project has existing model
+    exists(projectId: number) {
+        return this.http.get(this._modelURL + "/" + projectId + "/exists")
             .map(res => <ValidationResult>res.json())
             .catch(this.handleError);
     }

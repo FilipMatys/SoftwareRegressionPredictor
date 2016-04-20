@@ -24,6 +24,8 @@ export class ProjectGitCommitComponent implements OnInit {
     public showLinesOfCode = true;
     public showCodeAnalysis = true;
 
+    private _hasModel: boolean;
+
     constructor(
         private _routeParams: RouteParams,
         private _projectService: ProjectService,
@@ -34,6 +36,7 @@ export class ProjectGitCommitComponent implements OnInit {
             show: 'All'
         };
         this.changes = [];
+        this._hasModel = this._modelService.hasModel;
     }
 
     ngOnInit() {
@@ -50,17 +53,14 @@ export class ProjectGitCommitComponent implements OnInit {
             case 'changes':
                 this.showLinesOfCode = true;
                 this.showCodeAnalysis = false;
-                console.log('Changes');
                 break;
             case 'analysis':
                 this.showLinesOfCode = false;
                 this.showCodeAnalysis = true;
-                console.log("Analysis");
                 break;
             case 'all':
                 this.showLinesOfCode = true;
                 this.showCodeAnalysis = true;
-                console.log("All");
                 break;
         }
 

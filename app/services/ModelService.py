@@ -123,6 +123,23 @@ class ModelService(object):
         except FileNotFoundError:
             return dict()
 
+    """ Check if model exists """
+    def _exists(path):
+        # Init all path parts
+        parts = [ config.CLASSIFIERS, path, 'classifiers.pkl']
+        return ntpath.exists(ntpath.join(*parts))
+
+    """ Check if model exists for given project """
+    def exists(project_id):
+        # Init validation
+        validation = ValidationResult(dict())
+
+        # Check for file
+        validation.data["exists"] = ModelService._exists("project_" + project_id)
+
+        # Return validation
+        return validation
+
     """ Extract test cases from submission """
     def _extractTestCases(submission):
         # Init test cases

@@ -19,4 +19,5 @@ api.add_resource(resources.RepositoryLogResource, '/api/repository/<project_id>/
 api.add_resource(resources.RepositoryCommitResource, '/api/repository/<project_id>/commit/<hash>')
 api.add_resource(resources.ModelCreationResource, '/api/model/<project_id>/create')
 api.add_resource(resources.ModelLoadResource, '/api/model/<project_id>/load')
+api.add_resource(resources.ModelExistsResource, '/api/model/<project_id>/exists')
 api.add_resource(resources.ModelPredictionResource, '/api/model/<project_id>/predict/<revision>')

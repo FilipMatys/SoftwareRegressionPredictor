@@ -2174,6 +2174,7 @@
     <Content Include="app\static\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="app\static\js\bootstrap.min.js" />
     <Content Include="app\static\js\jquery-2.2.0.min.js" />
+    <Content Include="app\static\models\alert.ts" />
     <Content Include="app\static\module.project\project-git-commit.component.ts" />
     <Content Include="app\static\module.project\project-git-log.component.ts" />
     <Content Include="app\static\module.project\project-settings.component.ts" />
@@ -14610,6 +14611,7 @@
     <Content Include="app\static\node_modules\zone.js\README.md" />
     <Content Include="app\static\package.json" />
     <Content Include="app\static\pipes\model-search.pipe.ts" />
+    <Content Include="app\static\services\alert.service.ts" />
     <Content Include="app\static\services\model.service.ts" />
     <Content Include="app\static\services\project.service.ts" />
     <Content Include="app\static\models\project.ts" />

@@ -43,6 +43,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                         show: 'All'
                     };
                     this.changes = [];
+                    this._hasModel = this._modelService.hasModel;
                 }
                 ProjectGitCommitComponent.prototype.ngOnInit = function () {
                     this.getLog(Number(this.project.id), this._routeParams.get('hash'));
@@ -57,17 +58,14 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                         case 'changes':
                             this.showLinesOfCode = true;
                             this.showCodeAnalysis = false;
-                            console.log('Changes');
                             break;
                         case 'analysis':
                             this.showLinesOfCode = false;
                             this.showCodeAnalysis = true;
-                            console.log("Analysis");
                             break;
                         case 'all':
                             this.showLinesOfCode = true;
                             this.showCodeAnalysis = true;
-                            console.log("All");
                             break;
                     }
                     // Set label

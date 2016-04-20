@@ -17,6 +17,7 @@ import { ValidationResult } from '../models/validationResult';
 export class ProjectBoardComponent {
     public project: Project;
     private uploader: FileUploader;
+    private _hasModel: boolean;
 
     constructor(
         private _projectService: ProjectService,
@@ -24,6 +25,7 @@ export class ProjectBoardComponent {
         private _alertService: AlertService) {
 
         this.project = this._projectService.currentProject;
+        this._hasModel = this._modelService.hasModel;
         this.initUploader();
     }
 

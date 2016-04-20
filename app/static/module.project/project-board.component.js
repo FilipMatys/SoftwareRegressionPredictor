@@ -39,6 +39,7 @@ System.register(['angular2/core', 'angular2/common', '../node_modules/ng2-file-u
                     this._modelService = _modelService;
                     this._alertService = _alertService;
                     this.project = this._projectService.currentProject;
+                    this._hasModel = this._modelService.hasModel;
                     this.initUploader();
                 }
                 // Initialize uploader object and its properties

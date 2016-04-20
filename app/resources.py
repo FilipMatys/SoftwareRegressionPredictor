@@ -14,6 +14,12 @@ class ModelPredictionResource(Resource):
     def post(self, project_id, revision):
         return jsonify(ModelService.predictForPatchFile(project_id, request.files["file"]).getVars())
 
+""" Model exists resource """
+class ModelExistsResource(Resource):
+    # Check if model exists
+    def get(self, project_id):
+        return jsonify(ModelService.exists(project_id).getVars())
+
 """ Model creation resource """
 class ModelCreationResource(Resource):
     # Create model

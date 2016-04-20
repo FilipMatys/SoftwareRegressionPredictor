@@ -7,29 +7,31 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <h3>Regression prediction</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="tools-panel">
-            <span class="tool-item">Upload patch file to analyze regression threats</span>
+<div *ngIf="_hasModel">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Regression prediction</h3>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="content">
-            <input type="file" ng2-file-select [uploader]="uploader" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tools-panel">
+                <span class="tool-item">Upload patch file to analyze regression threats</span>
+            </div>
         </div>
     </div>
-</div>
-<div *ngIf="uploader.queue.length" class="row">
-    <div class="col-md-12">
-        <div class="content">
-            <button (click)="predictForFile()">Upload and analyze</button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content">
+                <input type="file" ng2-file-select [uploader]="uploader" />
+            </div>
+        </div>
+    </div>
+    <div *ngIf="uploader.queue.length" class="row">
+        <div class="col-md-12">
+            <div class="content">
+                <button (click)="predictForFile()">Upload and analyze</button>
+            </div>
         </div>
     </div>
 </div>
