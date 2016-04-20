@@ -34,6 +34,13 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="content">
+                <button (click)="predictForRevision()">Analyze revision</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="tools-panel">
                 <span class="tool-item">Tests with high chance of output change: <span class="text-selection">{{changes.length}}</span></span>
             </div>

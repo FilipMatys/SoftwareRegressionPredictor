@@ -46,7 +46,6 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                 }
                 ProjectGitCommitComponent.prototype.ngOnInit = function () {
                     this.getLog(Number(this.project.id), this._routeParams.get('hash'));
-                    this.makePrediction(Number(this.project.id), this._routeParams.get('hash'));
                 };
                 /**
                  * Show items based on selected value
@@ -73,6 +72,10 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                     }
                     // Set label
                     this.toolsPanel.show = label;
+                };
+                // Make prediction for current revision
+                ProjectGitCommitComponent.prototype.predictForRevision = function () {
+                    this.makePrediction(Number(this.project.id), this._routeParams.get('hash'));
                 };
                 ProjectGitCommitComponent.prototype.makePrediction = function (projectId, hash) {
                     var _this = this;

@@ -38,7 +38,6 @@ export class ProjectGitCommitComponent implements OnInit {
 
     ngOnInit() {
         this.getLog(Number(this.project.id), this._routeParams.get('hash'));
-        this.makePrediction(Number(this.project.id), this._routeParams.get('hash'));
     }
 
     /**
@@ -67,6 +66,11 @@ export class ProjectGitCommitComponent implements OnInit {
 
         // Set label
         this.toolsPanel.show = label;
+    }
+
+    // Make prediction for current revision
+    predictForRevision() {
+        this.makePrediction(Number(this.project.id), this._routeParams.get('hash'));
     }
 
     makePrediction(projectId: number, hash: string) {
