@@ -26,10 +26,10 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div *ngIf="uploader.queue.length" class="row">
     <div class="col-md-12">
         <div class="content">
-            <button (click)="predictForFile()">Upload</button>
+            <button (click)="predictForFile()">Upload and analyze</button>
         </div>
     </div>
 </div>
