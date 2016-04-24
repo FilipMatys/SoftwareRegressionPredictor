@@ -4,6 +4,7 @@ import { RouteParams,RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } 
 import { Project } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { ModelService } from '../services/model.service';
+import { RepositoryService } from '../services/repository.service';
 import { Observable } from 'rxjs/Observable';
 
 import { ProjectBoardComponent } from './project-board.component';
@@ -47,7 +48,8 @@ export class ProjectDetailComponent implements OnInit {
         private _router: Router,
         private _routeParams: RouteParams,
         private _projectService: ProjectService,
-        private _modelService: ModelService) {
+        private _modelService: ModelService,
+        private _repositoryService: RepositoryService) {
     }
 
     public project: Project;
@@ -56,6 +58,22 @@ export class ProjectDetailComponent implements OnInit {
     ngOnInit() {
         this.getProject(Number(this._routeParams.get('id')));
         this.checkIfModelExists(Number(this._routeParams.get('id')));
+        this.checkForProjectRepository(Number(this._routeParams.get('id')));
+    }
+
+    // Check if project has existing repository
+    checkForProjectRepository(id: number): void {
+        this._repositoryService.exists(id).subscribe(
+            result => {
+                // Check if result is valid
+                if (result.isValid) {
+                    this._repositoryService.repositoryExits = result.data["exists"];
+                }
+                // Something went wrong
+                else {
+                    this.errors = result.errors;
+                }
+            }, errors => this.errors = errors);
     }
 
     // Check model exists

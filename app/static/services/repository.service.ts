@@ -10,11 +10,19 @@ export class RepositoryService {
     constructor(private http: Http) { }
 
     private _repositoriesUrl = 'api/repository';
+    public repositoryExits: boolean;
 
 
     // Get last commits
     log(projectId: number, numberOfCommits: number) {
         return this.http.get(this._repositoriesUrl + "/" + projectId + "/log/" + numberOfCommits)
+            .map(res => <ValidationResult>res.json())
+            .catch(this.handleError);
+    }
+
+    // Check if projects repository exists
+    exists(projectId: number) {
+        return this.http.get(this._repositoriesUrl + "/" + projectId + "/exists")
             .map(res => <ValidationResult>res.json())
             .catch(this.handleError);
     }

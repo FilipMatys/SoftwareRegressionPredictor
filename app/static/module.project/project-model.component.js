@@ -54,6 +54,8 @@ System.register(['angular2/core', '../services/project.service', '../services/mo
                     this._modelService.create(this.project.id).subscribe(function (result) {
                         // Check if result is valid
                         if (result.isValid) {
+                            _this.loadModel();
+                            _this._modelService.hasModel = true;
                         }
                         else {
                             _this.errors = result.errors;

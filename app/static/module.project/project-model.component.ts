@@ -48,7 +48,8 @@ export class ProjectModelComponent {
             result => {
                 // Check if result is valid
                 if (result.isValid) {
-                    // TODO
+                    this.loadModel();
+                    this._modelService.hasModel = true;
                 }
                 // Something went wrong
                 else {

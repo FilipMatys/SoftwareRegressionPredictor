@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../services/project.service', '../services/model.service', './project-board.component', './project-settings.component', './project-git.component', './project-model.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../services/project.service', '../services/model.service', '../services/repository.service', './project-board.component', './project-settings.component', './project-git.component', './project-model.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, project_service_1, model_service_1, project_board_component_1, project_settings_component_1, project_git_component_1, project_model_component_1;
+    var core_1, router_1, project_service_1, model_service_1, repository_service_1, project_board_component_1, project_settings_component_1, project_git_component_1, project_model_component_1;
     var ProjectDetailComponent;
     return {
         setters:[
@@ -26,6 +26,9 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
             function (model_service_1_1) {
                 model_service_1 = model_service_1_1;
             },
+            function (repository_service_1_1) {
+                repository_service_1 = repository_service_1_1;
+            },
             function (project_board_component_1_1) {
                 project_board_component_1 = project_board_component_1_1;
             },
@@ -40,15 +43,30 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
             }],
         execute: function() {
             ProjectDetailComponent = (function () {
-                function ProjectDetailComponent(_router, _routeParams, _projectService, _modelService) {
+                function ProjectDetailComponent(_router, _routeParams, _projectService, _modelService, _repositoryService) {
                     this._router = _router;
                     this._routeParams = _routeParams;
                     this._projectService = _projectService;
                     this._modelService = _modelService;
+                    this._repositoryService = _repositoryService;
                 }
                 ProjectDetailComponent.prototype.ngOnInit = function () {
                     this.getProject(Number(this._routeParams.get('id')));
                     this.checkIfModelExists(Number(this._routeParams.get('id')));
+                    this.checkForProjectRepository(Number(this._routeParams.get('id')));
+                };
+                // Check if project has existing repository
+                ProjectDetailComponent.prototype.checkForProjectRepository = function (id) {
+                    var _this = this;
+                    this._repositoryService.exists(id).subscribe(function (result) {
+                        // Check if result is valid
+                        if (result.isValid) {
+                            _this._repositoryService.repositoryExits = result.data["exists"];
+                        }
+                        else {
+                            _this.errors = result.errors;
+                        }
+                    }, function (errors) { return _this.errors = errors; });
                 };
                 // Check model exists
                 ProjectDetailComponent.prototype.checkIfModelExists = function (id) {
@@ -109,7 +127,7 @@ System.register(['angular2/core', 'angular2/router', '../services/project.servic
                             component: project_settings_component_1.ProjectSettingsComponent
                         }
                     ]), 
-                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, project_service_1.ProjectService, model_service_1.ModelService])
+                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, project_service_1.ProjectService, model_service_1.ModelService, repository_service_1.RepositoryService])
                 ], ProjectDetailComponent);
                 return ProjectDetailComponent;
             }());

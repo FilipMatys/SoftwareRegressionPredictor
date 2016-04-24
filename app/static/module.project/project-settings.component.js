@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../services/project.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../services/project.service', '../services/repository.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../services/project.service'], function(expor
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, project_service_1;
+    var core_1, project_service_1, repository_service_1;
     var ProjectSettingsComponent;
     return {
         setters:[
@@ -19,19 +19,24 @@ System.register(['angular2/core', '../services/project.service'], function(expor
             },
             function (project_service_1_1) {
                 project_service_1 = project_service_1_1;
+            },
+            function (repository_service_1_1) {
+                repository_service_1 = repository_service_1_1;
             }],
         execute: function() {
             ProjectSettingsComponent = (function () {
-                function ProjectSettingsComponent(_projectService) {
+                function ProjectSettingsComponent(_projectService, _repositoryService) {
                     this._projectService = _projectService;
+                    this._repositoryService = _repositoryService;
                     this.project = this._projectService.currentProject;
+                    this._repositoryExists = this._repositoryService.repositoryExits;
                 }
                 ProjectSettingsComponent = __decorate([
                     core_1.Component({
                         selector: 'project-settings',
                         templateUrl: 'project_settings'
                     }), 
-                    __metadata('design:paramtypes', [project_service_1.ProjectService])
+                    __metadata('design:paramtypes', [project_service_1.ProjectService, repository_service_1.RepositoryService])
                 ], ProjectSettingsComponent);
                 return ProjectSettingsComponent;
             }());

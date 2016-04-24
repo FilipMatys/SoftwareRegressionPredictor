@@ -3,20 +3,30 @@
 <div class="row">
     <div class="col-md-12">
         <div class="tools-panel">
-            <span class="desc">Think of this</span>
+            <span class="desc">Project settings</span>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <ul class="win-list selectable">
-            <li ng-click="cloneProject()" class="inactive">
+            <li *ngIf="!_repositoryExists" ng-click="cloneProject()" class="inactive">
                 <img class="thumb" src="static/img/Git-64.png" alt="Alternate Text" />
                 <div>
                     Git integration
                 </div>
                 <div>
                     <span class="desc">Git has not yet been integrated into this project. This option allows creation of prediction model and allows simple overview of project commits.</span>
+                </div>
+                <div class="float-clear"></div>
+            </li>
+            <li *ngIf="_repositoryExists">
+                <img class="thumb" src="static/img/Git-64-White.png" alt="Alternate Text" />
+                <div>
+                    Git integration
+                </div>
+                <div>
+                    <span class="desc">Git has been integrated into this project.</span>
                 </div>
                 <div class="float-clear"></div>
             </li>

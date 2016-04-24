@@ -35,6 +35,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                // Check if projects repository exists
+                RepositoryService.prototype.exists = function (projectId) {
+                    return this.http.get(this._repositoriesUrl + "/" + projectId + "/exists")
+                        .map(function (res) { return res.json(); })
+                        .catch(this.handleError);
+                };
                 // Get commit
                 RepositoryService.prototype.getCommit = function (projectId, hash) {
                     return this.http.get(this.getCommitUrl(projectId, hash))
