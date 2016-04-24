@@ -3,6 +3,13 @@ from flask.ext.restful import Api, Resource
 from app.services.ProjectService import ProjectService
 from app.services.RepositoryService import RepositoryService
 from app.services.ModelService import ModelService
+from app.services.StateService import StateService
+
+""" Polling resource """
+class PollingResource(Resource):
+    # Get current state
+    def get(self):
+        return jsonify(StateService.poll().getVars())
 
 """ Model prediction resource """
 class ModelPredictionResource(Resource):

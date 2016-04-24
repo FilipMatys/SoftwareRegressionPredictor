@@ -11,6 +11,22 @@
     margin-top: 2rem;
 }
 
+div.status-bar {
+    opacity: 0.95;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #cf8634;
+    color: white;
+    padding: 1rem 2rem;
+}
+
+div.status-bar span.sub {
+    color: #f6e7d7;
+    display: block;
+    font-size: 1.2rem;
+}
+
 .navbar {
     border: none;
     border-radius: 0px;
@@ -80,7 +96,7 @@ ul.win-list.selectable li:hover {
 
 ul.win-list img.thumb {
     float: left;
-    background: #CF7934;
+    background: #cf8634;
     margin-right: 1rem;
     padding: 1rem;
     width: 6rem;
@@ -141,7 +157,7 @@ span.text-selection {
 span.active-text,
 div.tools-panel span.text-selection,
 div.tools-panel .tool-item .action {
-    color: #CF7934;
+    color: #cf8634;
 }
 
 button {
@@ -185,6 +201,7 @@ div.side-bar {
     height: 100%;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    top: 5rem;
 }
 
 div.side-bar img {
@@ -203,7 +220,7 @@ div.side-bar img.setting-icon {
 }
 
 div.side-bar .router-link-active img {
-    border-left: solid 0.5rem #CF7934;
+    border-left: solid 0.5rem #cf8634;
     padding-left: 1rem;
 }
 
@@ -331,7 +348,7 @@ table.model-list.selectable tbody tr:first-child:hover {
 }
 
 table.model-list.selectable tr.active {
-    background: #CF7934;
+    background: #cf8634;
     color: white;
 }
 

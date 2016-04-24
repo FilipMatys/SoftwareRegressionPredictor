@@ -21,3 +21,4 @@ api.add_resource(resources.ModelCreationResource, '/api/model/<project_id>/creat
 api.add_resource(resources.ModelLoadResource, '/api/model/<project_id>/load')
 api.add_resource(resources.ModelExistsResource, '/api/model/<project_id>/exists')
 api.add_resource(resources.ModelPredictionResource, '/api/model/<project_id>/predict/<revision>')
+api.add_resource(resources.PollingResource, '/api/poll')

@@ -2,8 +2,11 @@
 
 import { Project } from '../models/project';
 import { ProjectService } from '../services/project.service';
+import { PollingService } from '../services/polling.service';
 import { ModelService } from '../services/model.service';
 import { ModelSearchPipe } from '../pipes/model-search.pipe';
+
+import {Observable}     from 'rxjs/Observable';
 
 @Component({
     selector: 'project-model',

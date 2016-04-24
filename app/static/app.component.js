@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/alert', './projects.component', './services/project.service', './services/repository.service', './services/model.service', './services/alert.service', './module.project/project-detail.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/alert', './projects.component', './services/project.service', './services/repository.service', './services/model.service', './services/alert.service', './services/polling.service', './module.project/project-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, alert_1, projects_component_1, project_service_1, repository_service_1, model_service_1, alert_service_1, project_detail_component_1;
+    var core_1, http_1, router_1, alert_1, projects_component_1, project_service_1, repository_service_1, model_service_1, alert_service_1, polling_service_1, project_detail_component_1;
     var AppComponent;
     return {
         setters:[
@@ -41,16 +41,29 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/
             function (alert_service_1_1) {
                 alert_service_1 = alert_service_1_1;
             },
+            function (polling_service_1_1) {
+                polling_service_1 = polling_service_1_1;
+            },
             function (project_detail_component_1_1) {
                 project_detail_component_1 = project_detail_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_router) {
+                function AppComponent(_router, _pollingService) {
                     this._router = _router;
+                    this._pollingService = _pollingService;
+                    this.watchAppState();
                 }
                 AppComponent.prototype.goHome = function () {
                     this._router.navigate(['Projects']);
+                };
+                // Watch application state
+                AppComponent.prototype.watchAppState = function () {
+                    var _this = this;
+                    // Start polling
+                    this._pollingService.poll().subscribe(function (result) {
+                        _this._state = result.data["State"];
+                    });
                 };
                 // Show messages via alert and 
                 AppComponent.prototype._showAlert = function (messages, message) {
@@ -86,7 +99,8 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/
                             project_service_1.ProjectService,
                             repository_service_1.RepositoryService,
                             model_service_1.ModelService,
-                            alert_service_1.AlertService
+                            alert_service_1.AlertService,
+                            polling_service_1.PollingService
                         ]
                     }),
                     router_1.RouteConfig([
@@ -102,7 +116,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './models/
                             component: project_detail_component_1.ProjectDetailComponent
                         }
                     ]), 
-                    __metadata('design:paramtypes', [router_1.Router])
+                    __metadata('design:paramtypes', [router_1.Router, polling_service_1.PollingService])
                 ], AppComponent);
                 return AppComponent;
             }());

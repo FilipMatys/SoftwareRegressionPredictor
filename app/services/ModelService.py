@@ -2,6 +2,7 @@ from utils.ResultCloud import ResultCloud
 from utils.ValidationResult import ValidationResult
 from app.services.ProjectService import ProjectService
 from app.services.RepositoryService import RepositoryService
+from app.services.StateService import StateService
 from plugins.clanguage.Parser import Parser
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import LinearSVC
@@ -327,6 +328,7 @@ class ModelService(object):
 
     """ Create model for project """
     def create(project_id):
+        StateService.set("Getting project information")
         # Get detail about project
         validation = ProjectService.getDetail(project_id);
 
@@ -341,6 +343,7 @@ class ModelService(object):
         # We need to process each submission
         sortedSubmissions = sorted(validation.data["submissions"], key=lambda k: k['SequenceNumber'])
         for index, submission in enumerate(sortedSubmissions, start=0): 
+            StateService.set("Processing submission (" + str(index + 1) + "/" + str(sortedSubmissions.__len__()) + ")")
             # Init api handler
             resultCloud = ResultCloud(config.RESULT_CLOUD_API)
 
@@ -377,9 +380,13 @@ class ModelService(object):
                 # Update measurements
                 measurements = ModelService._updateModelMeasurements(measurements, ntpath.basename(testCase["Name"]), submissionValidation.data, testCase["ChangeFlag"])
 
+        StateService.set("Saving models")
+
         # Calculate and save models
         classifiers = ModelService._calculate(measurements)
         ModelService._saveClassifiers(classifiers, "project_" + project_id)
+
+        StateService.reset()
 
         # Return validation
         return validation
