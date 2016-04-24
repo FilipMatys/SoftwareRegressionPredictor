@@ -18,6 +18,7 @@ from app import db
 import config
 import ntpath
 import chardet
+import os
 
 class ModelService(object):
     """ Update measurements of model """
@@ -114,6 +115,12 @@ class ModelService(object):
     """ Save classifiers into file """
     def _saveClassifiers(classifiers, path):
         parts = [ config.CLASSIFIERS, path, 'classifiers.pkl']
+
+        # Create folder if does not exist
+        if not ntpath.exists(ntpath.join(*parts[:-1])):
+            os.makedirs(ntpath.join(*parts[:-1]))
+
+        # Save models
         joblib.dump(classifiers, ntpath.join(*parts))
 
     """ Load classifiers from file """
