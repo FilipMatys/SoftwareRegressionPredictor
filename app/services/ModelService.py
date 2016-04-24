@@ -350,7 +350,7 @@ class ModelService(object):
         # We need to process each submission
         sortedSubmissions = sorted(validation.data["submissions"], key=lambda k: k['SequenceNumber'])
         for index, submission in enumerate(sortedSubmissions, start=0): 
-            StateService.set("Processing submission (" + str(index + 1) + "/" + str(sortedSubmissions.__len__()) + ")")
+            StateService.set(validation.data["name"] + ": Processing submission (" + str(index + 1) + "/" + str(sortedSubmissions.__len__()) + ")")
             # Init api handler
             resultCloud = ResultCloud(config.RESULT_CLOUD_API)
 
@@ -387,7 +387,7 @@ class ModelService(object):
                 # Update measurements
                 measurements = ModelService._updateModelMeasurements(measurements, ntpath.basename(testCase["Name"]), submissionValidation.data, testCase["ChangeFlag"])
 
-        StateService.set("Saving models")
+        StateService.set(validation.data["name"] + ":Saving models")
 
         # Calculate and save models
         classifiers = ModelService._calculate(measurements)
